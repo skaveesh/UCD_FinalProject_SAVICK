@@ -1,4 +1,4 @@
-package smsimulator.server.root;
+package com.smsimulator.server.root;
 
 import org.restlet.Component;
 import org.restlet.data.Protocol;
