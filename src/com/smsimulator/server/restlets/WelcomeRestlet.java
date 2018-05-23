@@ -1,4 +1,4 @@
-package smsimulator.server.restlets;
+package com.smsimulator.server.restlets;
 
 import org.restlet.Request;
 import org.restlet.Response;

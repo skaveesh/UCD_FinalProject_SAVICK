@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="org.restlet">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/com/smsimulator/libs/org.restlet.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
