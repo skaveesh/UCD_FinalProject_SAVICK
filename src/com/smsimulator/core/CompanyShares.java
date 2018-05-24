@@ -5,8 +5,9 @@ import java.util.Random;
 
 public class CompanyShares {
 
-    public void randomStocks() {
+    public Float[] randomStocks() {
 
+        Float[] generatedCompanyStock = new Float[15];
         for(int i=0;i<10;i++) {
             for (int j = 0; j < 5; j++) {
                 Random r = new Random();
@@ -17,11 +18,11 @@ public class CompanyShares {
                     numSet.add(random);
                 }
                 for (Float ranStock : numSet) {
-                    System.out.print(ranStock + "\t");
+                    generatedCompanyStock[i] = ranStock;
                 }
             }
-            System.out.print("\n");
         }
+        return generatedCompanyStock;
     }
 
 }
