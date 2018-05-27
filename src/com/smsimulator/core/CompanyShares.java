@@ -1,26 +1,22 @@
 package com.smsimulator.core;
 
-import java.util.HashSet;
 import java.util.Random;
 
 public class CompanyShares {
 
-    public void randomStocks() {
+    private Double[] generatedCompanyStockArray = new Double[20];
 
-        for(int i=0;i<10;i++) {
-            for (int j = 0; j < 5; j++) {
-                Random r = new Random();
-                HashSet<Float> numSet = new HashSet<>();
+    public CompanyShares() {
+        this.generateRandomStocks();
+    }
 
-                while (numSet.size() < 1) {
-                    float random = r.nextInt(99) + 10;
-                    numSet.add(random);
-                }
-                for (Float ranStock : numSet) {
-                    System.out.print(ranStock + "\t");
-                }
-            }
-            System.out.print("\n");
+    public Double[] getGeneratedCompanyStockArray() {
+        return generatedCompanyStockArray;
+    }
+
+    private void generateRandomStocks() {
+        for (int i = 0; i < 20; i++) {
+            generatedCompanyStockArray[i] = Math.round((new Random().nextDouble() * (120.2f - 90.2f) + 90.2f) * 100f) / 100d;
         }
     }
 

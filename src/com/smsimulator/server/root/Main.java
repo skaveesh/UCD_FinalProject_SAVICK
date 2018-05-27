@@ -15,9 +15,5 @@ public class Main {
         component.getServers().add(Protocol.HTTP, 5000);
         component.getDefaultHost().attach("", new InboundRoot());
         component.start();
-
-        CompanyShares shr = new CompanyShares(); //call to random shares generate class
-        shr.randomStocks();
-
     }
 }
