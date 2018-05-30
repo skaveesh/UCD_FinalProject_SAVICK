@@ -5,6 +5,7 @@ import org.restlet.Response;
 import org.restlet.Restlet;
 import org.restlet.data.Method;
 import org.restlet.data.Status;
+
 import com.smsimulator.gsoncore.LoginPlayer;
 import com.smsimulator.server.root.InboundRoot;
 
@@ -17,9 +18,9 @@ public class LoginPlayerRestlet extends Restlet {
         if (request.getMethod().equals(Method.POST)) {
             LoginPlayer loginPlayer = InboundRoot.gson.fromJson(request.getEntityAsText(), LoginPlayer.class);
 
-            if (loginPlayer.getAuthorization().getUsername().equals("hello") && loginPlayer.getAuthorization().getPassword().equals("123456"))
+            if (loginPlayer.getAuthorization().getUsername().equals("hello") && loginPlayer.getAuthorization().getPassword().equals("123456")) {
                 response.setStatus(Status.SUCCESS_OK);
-            else
+            }else
                 response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
 
         } else {
