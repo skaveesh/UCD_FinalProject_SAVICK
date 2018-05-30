@@ -11,7 +11,7 @@ import org.restlet.data.Status;
  * Created by skaveesh on 2018-05-21.
  */
 
-public class WelcomeRestlet extends Restlet{
+public class WelcomeRestlet extends Restlet {
     @Override
     public void handle(Request request, Response response) {
         if (request.getMethod().equals(Method.GET)) {
