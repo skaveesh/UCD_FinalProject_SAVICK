@@ -13,8 +13,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
         // Test below methods
-        DBUtils.getRemoteConnection();
-        DBUtils.testConnection();
         Component component = new Component();
         component.getServers().add(Protocol.HTTP, 5000);
         component.getDefaultHost().attach("", new InboundRoot());

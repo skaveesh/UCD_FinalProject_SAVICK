@@ -11,5 +11,6 @@
     <orderEntry type="library" name="gson-2.8.2" level="project" />
     <orderEntry type="library" name="org.restlet" level="project" />
     <orderEntry type="library" name="mysql-connector" level="project" />
+    <orderEntry type="library" name="mysql-connector" level="project" />
   </component>
 </module>
