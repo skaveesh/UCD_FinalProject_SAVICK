@@ -11,13 +11,11 @@ public class LoginPlayer {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public LoginPlayer() {
     }
 
     /**
-     *
      * @param authorization
      */
     public LoginPlayer(Authorization authorization) {

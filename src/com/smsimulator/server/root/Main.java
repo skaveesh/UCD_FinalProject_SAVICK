@@ -1,5 +1,6 @@
 package com.smsimulator.server.root;
 
+import com.smsimulator.core.DBUtils;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
@@ -13,7 +14,12 @@ import java.util.HashSet;
 
 public class Main extends InboundRoot {
 
+    private static int TURN = 0;
+
     public static void main(String[] args) throws Exception {
+
+        //Start DB service
+        new DBUtils();
 
         //Cross-origin resource sharing (CORS) support
         CorsService corsService = new CorsService();
@@ -30,5 +36,13 @@ public class Main extends InboundRoot {
         component.getServers().add(Protocol.HTTP, 5000);
         component.getDefaultHost().attach("", inboundRoot);
         component.start();
+    }
+
+    public static int getTURN() {
+        return TURN;
+    }
+
+    public static int nextTURN() {
+        return ++Main.TURN;
     }
 }

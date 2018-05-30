@@ -20,7 +20,7 @@ public class LoginPlayerRestlet extends Restlet {
 
             if (loginPlayer.getAuthorization().getUsername().equals("hello") && loginPlayer.getAuthorization().getPassword().equals("123456")) {
                 response.setStatus(Status.SUCCESS_OK);
-            }else
+            } else
                 response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
 
         } else {
