@@ -1,6 +1,9 @@
 package com.smsimulator.server.root;
 
+import com.smsimulator.core.CompanyStock;
 import com.smsimulator.core.DBUtils;
+import com.smsimulator.core.Market;
+import com.smsimulator.core.Sector;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
@@ -36,6 +39,41 @@ public class Main extends InboundRoot {
         component.getServers().add(Protocol.HTTP, 5000);
         component.getDefaultHost().attach("", inboundRoot);
         component.start();
+
+
+        Market sriLankanStockMarket = new Market();
+
+        //==================Sectors==================//
+
+        Sector financialSector = new Sector();
+        Sector technologicalSector = new Sector();
+        Sector manufacturingSector = new Sector();
+
+        //==================Stocks==================//
+
+        //Stocks of Financial Sector
+
+
+        CompanyStock hattonNationalBank = new CompanyStock("HNB");
+        hattonNationalBank.setStockArray();
+        CompanyStock lolc = new CompanyStock("LOLC");
+        lolc.setStockArray();
+
+        //Stocks of Technological Sector
+        CompanyStock johnKeells = new CompanyStock("JKH");
+        johnKeells.setStockArray();
+        CompanyStock softlogic = new CompanyStock("SHL");
+        softlogic.setStockArray();
+
+        //Stocks of Manufacturing Sector
+        CompanyStock dutchLanka = new CompanyStock("DLT");
+        dutchLanka.setStockArray();
+        CompanyStock sierra = new CompanyStock("SIRA");
+        sierra.setStockArray();
+
+
+        technologicalSector.increaseStockValuesInSector(4.5,7);
+        johnKeells.increaseStockValue(5.5,3);
     }
 
     public static int getTURN() {
