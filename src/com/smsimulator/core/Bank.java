@@ -4,6 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Created by skaveesh on 2018-05-30.
+ */
+
 public class Bank {
 
     private static final double initialAmount = 1000;
@@ -27,7 +31,7 @@ public class Bank {
             return false;
     }
 
-    public static boolean deposit(int turn, String name, String sender, double amount) {
+    public boolean deposit(int turn, String name, String sender, double amount) {
         int uid = getUidFromName(name);
 
         if (uid != -1) {
@@ -47,7 +51,7 @@ public class Bank {
             return false;
     }
 
-    public static boolean withdraw(int turn, String name, String receiver, double amount) {
+    public  boolean withdraw(int turn, String name, String receiver, double amount) {
         int uid = getUidFromName(name);
 
         if (uid != -1) {
@@ -65,25 +69,21 @@ public class Bank {
             return false;
     }
 
-    public static double balance(String name) {
-        int uid = getUidFromName(name);
+    public double balance(String name) {
         double balance = -1;
 
-        if (uid != -1) {
-            try {
-                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT balance FROM bank_account WHERE uid=?");
-                preparedStatement.setInt(1, uid);
-                resultSet = preparedStatement.executeQuery();
+        try {
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT ba.balance FROM bank_account AS ba INNER JOIN player AS p ON ba.uid=p.uid WHERE p.username=?");
+            preparedStatement.setString(1, name);
+            resultSet = preparedStatement.executeQuery();
 
-                while (resultSet.next()) {
-                    balance = resultSet.getDouble("balance");
-                }
-                return balance;
-            } catch (SQLException e) {
-                return -1;
+            while (resultSet.next()) {
+                balance = resultSet.getDouble("balance");
             }
-        } else
             return balance;
+        } catch (SQLException e) {
+            return -1;
+        }
     }
 
     private static int getUidFromName(String name) {
