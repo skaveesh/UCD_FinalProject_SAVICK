@@ -20,7 +20,7 @@ public class BankDepositRestlet extends Restlet {
         if (request.getMethod().equals(Method.POST)) {
             BankDeposit bankDeposit = InboundRoot.gson.fromJson(request.getEntityAsText(), BankDeposit.class);
 
-            if (Bank.deposit(Main.nextTURN(), bankDeposit.getDeposit().getName(), bankDeposit.getDeposit().getSender(), bankDeposit.getDeposit().getAmount())) {
+            if (new Bank().deposit(Main.nextTURN(), bankDeposit.getDeposit().getName(), bankDeposit.getDeposit().getSender(), bankDeposit.getDeposit().getAmount())) {
                 response.setStatus(Status.SUCCESS_OK);
             } else
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);

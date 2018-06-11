@@ -20,7 +20,7 @@ public class BankAccountCreateRestlet extends Restlet {
         if (request.getMethod().equals(Method.POST)) {
             CreateBankAccount createBankAccount = InboundRoot.gson.fromJson(request.getEntityAsText(), CreateBankAccount.class);
 
-            if (Bank.createAccount(Main.nextTURN(), createBankAccount.getCreateBankAccountFromName().getName())) {
+            if (new Bank().createAccount(Main.nextTURN(), createBankAccount.getCreateBankAccountFromName().getName())) {
                 response.setStatus(Status.SUCCESS_OK);
             } else
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);

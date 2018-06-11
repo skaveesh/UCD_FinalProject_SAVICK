@@ -14,7 +14,7 @@ public class Bank {
     private static PreparedStatement preparedStatement;
     private static ResultSet resultSet;
 
-    public static boolean createAccount(int turn, String name) {
+    public boolean createAccount(int turn, String name) {
         int uid = getUidFromName(name);
 
         if (uid != -1) {
@@ -51,7 +51,7 @@ public class Bank {
             return false;
     }
 
-    public  boolean withdraw(int turn, String name, String receiver, double amount) {
+    public boolean withdraw(int turn, String name, String receiver, double amount) {
         int uid = getUidFromName(name);
 
         if (uid != -1) {
@@ -86,7 +86,7 @@ public class Bank {
         }
     }
 
-    private static int getUidFromName(String name) {
+    private int getUidFromName(String name) {
 
         try {
             preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT uid FROM player WHERE username=?");

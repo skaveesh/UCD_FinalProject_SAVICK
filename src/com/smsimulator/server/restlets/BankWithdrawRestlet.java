@@ -20,7 +20,7 @@ public class BankWithdrawRestlet extends Restlet {
         if (request.getMethod().equals(Method.POST)) {
             BankWithdraw bankWithdraw = InboundRoot.gson.fromJson(request.getEntityAsText(), BankWithdraw.class);
 
-            if (Bank.withdraw(Main.nextTURN(), bankWithdraw.getWithdraw().getName(), bankWithdraw.getWithdraw().getReceiver(), bankWithdraw.getWithdraw().getAmount())) {
+            if (new Bank().withdraw(Main.nextTURN(), bankWithdraw.getWithdraw().getName(), bankWithdraw.getWithdraw().getReceiver(), bankWithdraw.getWithdraw().getAmount())) {
                 response.setStatus(Status.SUCCESS_OK);
             } else
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);

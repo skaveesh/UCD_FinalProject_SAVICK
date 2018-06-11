@@ -21,7 +21,7 @@ public class BankBalanceRestlet extends Restlet {
     public void handle(Request request, Response response) {
         if (request.getMethod().equals(Method.POST)) {
             BankBalance bankBalance = InboundRoot.gson.fromJson(request.getEntityAsText(), BankBalance.class);
-            double currentBalanceAmount = Bank.balance(bankBalance.getGetBalance().getName());
+            double currentBalanceAmount = new Bank().balance(bankBalance.getGetBalance().getName());
 
             if (currentBalanceAmount != -1) {
                 //response gson object

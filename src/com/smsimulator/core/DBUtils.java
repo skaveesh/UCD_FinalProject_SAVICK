@@ -17,7 +17,7 @@ public class DBUtils {
     }
 
     public DBUtils() throws Exception {
-        databaseConnection = createMySqlLocalConnection();
+        databaseConnection = createMySqlConnection();
     }
 
     public static Connection getDatabaseConnection() {

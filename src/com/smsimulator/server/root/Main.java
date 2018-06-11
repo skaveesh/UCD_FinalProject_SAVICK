@@ -81,6 +81,6 @@ public class Main extends InboundRoot {
     }
 
     public static int nextTURN() {
-        return ++Main.TURN;
+        return ++TURN;
     }
 }
