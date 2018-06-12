@@ -11,11 +11,11 @@ import java.sql.SQLException;
 public class Bank {
 
     private static final double initialAmount = 1000;
-    private static PreparedStatement preparedStatement;
-    private static ResultSet resultSet;
+    private PreparedStatement preparedStatement;
+    private ResultSet resultSet;
 
     public boolean createAccount(int turn, String name) {
-        int uid = getUidFromName(name);
+        int uid = new Player().getUidFromName(name);
 
         if (uid != -1) {
             try {
@@ -32,7 +32,7 @@ public class Bank {
     }
 
     public boolean deposit(int turn, String name, String sender, double amount) {
-        int uid = getUidFromName(name);
+        int uid = new Player().getUidFromName(name);
 
         if (uid != -1) {
             try {
@@ -52,7 +52,7 @@ public class Bank {
     }
 
     public boolean withdraw(int turn, String name, String receiver, double amount) {
-        int uid = getUidFromName(name);
+        int uid = new Player().getUidFromName(name);
 
         if (uid != -1) {
             try {
@@ -81,24 +81,6 @@ public class Bank {
                 balance = resultSet.getDouble("balance");
             }
             return balance;
-        } catch (SQLException e) {
-            return -1;
-        }
-    }
-
-    private int getUidFromName(String name) {
-
-        try {
-            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT uid FROM player WHERE username=?");
-            preparedStatement.setString(1, name);
-            resultSet = preparedStatement.executeQuery();
-            int returnUid = -1;
-
-            while (resultSet.next()) {
-                returnUid = resultSet.getInt("uid");
-            }
-
-            return returnUid;
         } catch (SQLException e) {
             return -1;
         }
