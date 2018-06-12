@@ -7,45 +7,40 @@ package com.smsimulator.core;
 
 public class CompanyStock {
 
-    private double stockPrice;
     private double stockArray[] = new double[20];
-    private String stock_name;
+    private String companyName;
+    private String stockName;
 
-    public CompanyStock(String name)
-    {
-        this.stock_name = name;
-    }
+    public CompanyStock(String companyName, String stockName) {
+        this.companyName = companyName;
+        this.stockName = stockName;
 
-
-    private double random = (Math.random() * ((120 - 70) + 1)) + 70;
-    private double stock_value = Math.round(random * 100.0) / 100.0;
-
-    public void setStockArray() {
+        double random = (Math.random() * ((120 - 70) + 1)) + 70;
+        double stockValue = Math.round(random * 100.0) / 100.0;
+        //initializing stock
         for (int i = 0; i < stockArray.length; i++) {
-            stockArray[i] = stock_value;
+            stockArray[i] = stockValue;
         }
     }
 
     public void increaseStockValue(double value, int index) {
         stockArray[index] = stockArray[index] + value ;
-        stockPrice = stockArray[index];
-
     }
 
-    public void decreaseStockValue(double value,int index) {
+    public void decreaseStockValue(double value, int index) {
         stockArray[index] = stockArray[index] - value ;
-        stockPrice = stockArray[index];
-
     }
 
-    public double getStockPrice() {
-        return stockPrice;
+    public double getStockPrice(int index) {
+        return ((0 <= index && index <20) ? stockArray[index] : -1);
     }
 
-
-    public String getStock_name()
+    public String getStockName()
     {
-        return stock_name;
+        return stockName;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
 }

@@ -40,8 +40,23 @@ public class Main extends InboundRoot {
         component.getDefaultHost().attach("", inboundRoot);
         component.start();
 
+        //initialize stocks
+        initializeStocks();
+    }
 
-        Market sriLankanStockMarket = new Market();
+    public static int getTURN() {
+        return TURN;
+    }
+
+    public static int nextTURN() {
+        return ++TURN;
+    }
+
+    private static void initializeStocks(){
+
+        //==================Market==================//
+
+        Market stockMarket = new Market();
 
         //==================Sectors==================//
 
@@ -52,35 +67,34 @@ public class Main extends InboundRoot {
         //==================Stocks==================//
 
         //Stocks of Financial Sector
-
-
-        CompanyStock hattonNationalBank = new CompanyStock("HNB");
-        hattonNationalBank.setStockArray();
-        CompanyStock lolc = new CompanyStock("LOLC");
-        lolc.setStockArray();
+        CompanyStock hattonNationalBank = new CompanyStock("Hatton National Bank", "HNB");
+        CompanyStock lolc = new CompanyStock("Sri Lanka Leasing Company", "LOLC");
 
         //Stocks of Technological Sector
-        CompanyStock johnKeells = new CompanyStock("JKH");
-        johnKeells.setStockArray();
-        CompanyStock softlogic = new CompanyStock("SHL");
-        softlogic.setStockArray();
+        CompanyStock johnKeells = new CompanyStock("John Keels", "JKH");
+        CompanyStock softlogic = new CompanyStock("Softlogic", "SHL");
 
         //Stocks of Manufacturing Sector
-        CompanyStock dutchLanka = new CompanyStock("DLT");
-        dutchLanka.setStockArray();
-        CompanyStock sierra = new CompanyStock("SIRA");
-        sierra.setStockArray();
+        CompanyStock dutchLanka = new CompanyStock("Dutch Lanka", "DLT");
+        CompanyStock sierra = new CompanyStock("Sierra", "SIRA");
 
+        //add stock to corresponding sector
+        financialSector.addToSector(hattonNationalBank);
+        financialSector.addToSector(lolc);
 
+        technologicalSector.addToSector(johnKeells);
+        technologicalSector.addToSector(softlogic);
+
+        manufacturingSector.addToSector(dutchLanka);
+        manufacturingSector.addToSector(sierra);
+
+        //add sectors to the market
+        stockMarket.addToMarket(financialSector);
+        stockMarket.addToMarket(technologicalSector);
+        stockMarket.addToMarket(manufacturingSector);
+
+        //change values (temporary)
         technologicalSector.increaseStockValuesInSector(4.5,7);
         johnKeells.increaseStockValue(5.5,3);
-    }
-
-    public static int getTURN() {
-        return TURN;
-    }
-
-    public static int nextTURN() {
-        return ++TURN;
     }
 }
