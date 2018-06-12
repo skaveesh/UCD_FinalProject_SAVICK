@@ -52,7 +52,7 @@ public class Main extends InboundRoot {
         return ++TURN;
     }
 
-    private static void initializeStocks(){
+    private static void initializeStocks() {
 
         //==================Market==================//
 
@@ -94,7 +94,44 @@ public class Main extends InboundRoot {
         stockMarket.addToMarket(manufacturingSector);
 
         //change values (temporary)
-        technologicalSector.increaseStockValuesInSector(4.5,7);
-        johnKeells.increaseStockValue(5.5,3);
+        technologicalSector.setNewStockValuesInSector(4.5, 7);
+        johnKeells.setNewStockValue(5.5, 3);
+
+
+        //get certain value of stock within stock array by accessing through sector list in the market(Implement this code inside marketcomponent or eventcomponent)
+        //System.out.println(stockMarket.sectorList.get(stockMarket.sectorList.indexOf(technologicalSector)).stockList.get(technologicalSector.stockList.indexOf(johnKeells)).getStockPrice(15));
+
+        //iterating through all the stocks in the market sectors (Implement this code inside marketcomponent or eventcomponent)
+        for (Sector sector : stockMarket.sectorList) {
+            for (CompanyStock companyStock : sector.stockList) {
+                for (int i = 0; i < 20; i++) {
+                    //this can be use to change values
+
+                    //printing all the stock values in the market
+                    //System.out.println(companyStock.getStockPrice(i));
+                }
+            }
+        }
+
+        //use stockMarket.sectorList to get access to any sector or stock inside marketcomponent or eventcomponent
+
+
+        //get stock prices of certain companies BEFORE increasing value by 5
+        System.out.println(hattonNationalBank.getStockPrice(4));
+        System.out.println(lolc.getStockPrice(16));
+        System.out.println(softlogic.getStockPrice(3));
+
+        //increase financial sector values by 5
+        for (CompanyStock stock : stockMarket.sectorList.get(stockMarket.sectorList.indexOf(financialSector)).stockList) {
+            for (int i = 0; i < 20; i++) {
+                stock.setNewStockValue(stock.getStockPrice(i) + 5, i);
+            }
+        }
+
+        //get stock prices of certain companies AFTER increasing value by 5
+        System.out.println(hattonNationalBank.getStockPrice(4));
+        System.out.println(lolc.getStockPrice(16));
+        System.out.println(softlogic.getStockPrice(3));
+
     }
 }

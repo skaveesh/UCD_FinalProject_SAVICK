@@ -8,24 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
-    private List<Sector> sectorList = new ArrayList<>();
+    public List<Sector> sectorList = new ArrayList<>();
 
     public void addToMarket(Sector sector){
         sectorList.add(sector);
     }
 
-    public void increaseStockValuesInMarket(double value,int index){
+    public void setNewStockValuesInMarket(double value,int index){
         for(Sector sector:sectorList){
             for(CompanyStock stock:sector.stockList){
-                stock.increaseStockValue(value,index);
-            }
-        }
-    }
-
-    public void decreaseStockValuesInMarket(double value,int index){
-        for(Sector sector:sectorList){
-            for(CompanyStock stock:sector.stockList){
-                stock.decreaseStockValue(value,index);
+                stock.setNewStockValue(value,index);
             }
         }
     }

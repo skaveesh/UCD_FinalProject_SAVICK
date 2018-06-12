@@ -23,12 +23,8 @@ public class CompanyStock {
         }
     }
 
-    public void increaseStockValue(double value, int index) {
-        stockArray[index] = stockArray[index] + value ;
-    }
-
-    public void decreaseStockValue(double value, int index) {
-        stockArray[index] = stockArray[index] - value ;
+    public void setNewStockValue(double value, int index) {
+        stockArray[index] = value ;
     }
 
     public double getStockPrice(int index) {
