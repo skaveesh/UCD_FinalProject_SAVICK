@@ -48,29 +48,31 @@ public class Broker {
      * @param price    is single stock current price
      */
     public boolean buy(int turn, String name, String stock, int quantity, double price) {
+        boolean bb;
         int uid = player.getUidFromName(name);
         double balance = bank.balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
-        double amount = (double)quantity * price;
-        // Check if balace is more than quantity * price
+        double amount = quantity * price;
+        // Check if balace is less than quantity * price
         if(balance < amount){
             return false;
         }
-        bank.withdraw(turn, name, stock, amount);
+        bb = bank.withdraw(turn, name, stock, amount);
+        if(bb == true){
+            if(uid != -1){
+                try{
+                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
+                    preparedStatement.setString(1, stock);
+                    preparedStatement.setInt(2, quantity);
+                    preparedStatement.setDouble(3, price);
+                    preparedStatement.setInt(4, turn);
+                    preparedStatement.setInt(5, uid);
 
-        if(uid != -1){
-            try{
-                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
-                preparedStatement.setString(1, stock);
-                preparedStatement.setInt(2, quantity);
-                preparedStatement.setDouble(3, price);
-                preparedStatement.setInt(4, turn);
-                preparedStatement.setInt(5, uid);
-
-            }catch (SQLException e){
+                }catch (SQLException e){
+                    return false;
+                }
+            } else{
                 return false;
             }
-        } else{
-            return false;
         }
         return true;
     }
@@ -83,26 +85,27 @@ public class Broker {
      * @param price    is single stock current price
      */
     public boolean sell(int turn, String name, String stock, int quantity, double price) {
+        boolean bb;
         int uid = player.getUidFromName(name);
-        double amount = (double)quantity * price;
+        double amount = quantity * price;
         // Have to check "The transaction fails if the player does not have the specified quantity of stock"
+        bb = bank.deposit(turn, name, stock, amount);
+        if(bb == true){
+            if(uid != -1){
+                try{
+                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
+                    preparedStatement.setString(1, stock);
+                    preparedStatement.setInt(2, quantity);
+                    preparedStatement.setDouble(3, price);
+                    preparedStatement.setInt(4, turn);
+                    preparedStatement.setInt(5, uid);
 
-        bank.deposit(turn, name, stock, amount);
-
-        if(uid != -1){
-            try{
-                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
-                preparedStatement.setString(1, stock);
-                preparedStatement.setInt(2, quantity);
-                preparedStatement.setDouble(3, price);
-                preparedStatement.setInt(4, turn);
-                preparedStatement.setInt(5, uid);
-
-            }catch (SQLException e){
+                }catch (SQLException e){
+                    return false;
+                }
+            } else{
                 return false;
             }
-        } else{
-            return false;
         }
         return true;
     }
