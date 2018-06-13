@@ -4,7 +4,6 @@ import com.smsimulator.core.Bank;
 import com.smsimulator.gsoncore.CreateBankAccount;
 import com.smsimulator.server.root.InboundRoot;
 import com.smsimulator.server.root.Main;
-
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.Restlet;
