@@ -1,13 +1,12 @@
 package com.smsimulator.server.restlets;
 
+import com.smsimulator.gsoncore.LoginPlayer;
+import com.smsimulator.server.root.InboundRoot;
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.Restlet;
 import org.restlet.data.Method;
 import org.restlet.data.Status;
-
-import com.smsimulator.gsoncore.LoginPlayer;
-import com.smsimulator.server.root.InboundRoot;
 
 /**
  * Created by skaveesh on 2018-05-23.

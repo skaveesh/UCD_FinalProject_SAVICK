@@ -1,7 +1,6 @@
 package com.smsimulator.server.root;
 
 import com.google.gson.Gson;
-
 import com.smsimulator.server.restlets.*;
 import org.restlet.Application;
 import org.restlet.Restlet;
@@ -24,7 +23,13 @@ public class InboundRoot extends Application {
         router.attach("/bank/createaccount", new BankAccountCreateRestlet());
         router.attach("/bank/deposit", new BankDepositRestlet());
         router.attach("/bank/withdraw", new BankWithdrawRestlet());
-        router.attach("/bank/balance", new BankBalanceRestlet());
+        router.attach("/bank/balance/{name}", new BankBalanceRestlet());
+
+        router.attach("/broker/createaccount", new BrokerAccountCreateRestlet());
+        router.attach("/broker/portfolio/{name}", new BrokerPortfolioRestlet());
+        router.attach("/broker/stock/getall", new StockMarketRestlet());
+        router.attach("/broker/stock/{stockname}", new StockPriceListOfCompanyRestlet());
+        router.attach("/broker/stock/{stockname}/{index}", new StockPriceOfCompanyRestlet());
 
         return router;
     }
