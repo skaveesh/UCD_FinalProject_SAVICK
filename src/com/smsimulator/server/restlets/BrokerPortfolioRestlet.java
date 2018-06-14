@@ -29,7 +29,7 @@ public class BrokerPortfolioRestlet extends Restlet {
                 //response gson object
                 com.smsimulator.gsoncore.Portfolio portfolio1 = new com.smsimulator.gsoncore.Portfolio();
                 portfolio1.setName(portfolio.getName());
-                portfolio1.setStockQuantityList(portfolio.getStockQuantityList());
+                portfolio1.setOwnStockList(portfolio.getOwnStockList());
                 portfolio1.setBroughtStockList(portfolio.getBroughtStockList());
                 portfolio1.setSoldStockList(portfolio.getSoldStockList());
 

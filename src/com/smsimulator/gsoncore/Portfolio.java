@@ -12,9 +12,9 @@ public class Portfolio {
 @SerializedName("name")
 @Expose
 private String name;
-@SerializedName("stockQuantityList")
+@SerializedName("ownStockList")
 @Expose
-private List<StockQuantity> stockQuantityList = null;
+private List<StockQuantity> ownStockList = null;
 @SerializedName("broughtStockList")
 @Expose
 private List<Transaction> broughtStockList = null;
@@ -33,13 +33,13 @@ public Portfolio() {
 *
 * @param broughtStockList
 * @param name
-* @param stockQuantityList
+* @param ownStockList
 * @param soldStockList
 */
-public Portfolio(String name, List<StockQuantity> stockQuantityList, List<Transaction> broughtStockList, List<Transaction> soldStockList) {
+public Portfolio(String name, List<StockQuantity> ownStockList, List<Transaction> broughtStockList, List<Transaction> soldStockList) {
 super();
 this.name = name;
-this.stockQuantityList = stockQuantityList;
+this.ownStockList = ownStockList;
 this.broughtStockList = broughtStockList;
 this.soldStockList = soldStockList;
 }
@@ -52,12 +52,12 @@ public void setName(String name) {
 this.name = name;
 }
 
-public List<StockQuantity> getStockQuantityList() {
-return stockQuantityList;
+public List<StockQuantity> getOwnStockList() {
+return ownStockList;
 }
 
-public void setStockQuantityList(List<StockQuantity> stockQuantityList) {
-this.stockQuantityList = stockQuantityList;
+public void setOwnStockList(List<StockQuantity> ownStockList) {
+this.ownStockList = ownStockList;
 }
 
 public List<Transaction> getBroughtStockList() {

@@ -13,6 +13,11 @@ public class Player {
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
+    /**
+     * get uid of the player from the database
+     * @param name username of the player
+     * @return uid of the player
+     */
     public int getUidFromName(String name) {
 
         try {

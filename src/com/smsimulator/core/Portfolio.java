@@ -10,13 +10,13 @@ import java.util.List;
 public class Portfolio {
 
     private String name;
-    private List<StockQuantity> stockQuantityList = new ArrayList<>();
+    private List<StockQuantity> ownStockList = new ArrayList<>();
     private List<Transaction> broughtStockList = new ArrayList<>();
     private List<Transaction> soldStockList = new ArrayList<>();
 
-    public Portfolio(String name, List<StockQuantity> stockQuantityList, List<Transaction> broughtStockList, List<Transaction> soldStockList) {
+    public Portfolio(String name, List<StockQuantity> ownStockList, List<Transaction> broughtStockList, List<Transaction> soldStockList) {
         this.name = name;
-        this.stockQuantityList = stockQuantityList;
+        this.ownStockList = ownStockList;
         this.broughtStockList = broughtStockList;
         this.soldStockList = soldStockList;
     }
@@ -25,8 +25,8 @@ public class Portfolio {
         return name;
     }
 
-    public List<StockQuantity> getStockQuantityList() {
-        return stockQuantityList;
+    public List<StockQuantity> getOwnStockList() {
+        return ownStockList;
     }
 
     public List<Transaction> getBroughtStockList() {

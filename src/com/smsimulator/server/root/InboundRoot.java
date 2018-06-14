@@ -27,6 +27,9 @@ public class InboundRoot extends Application {
 
         router.attach("/broker/createaccount", new BrokerAccountCreateRestlet());
         router.attach("/broker/portfolio/{name}", new BrokerPortfolioRestlet());
+        router.attach("/broker/stock/getall", new StockMarketRestlet());
+        router.attach("/broker/stock/{stockname}", new StockPriceListOfCompanyRestlet());
+        router.attach("/broker/stock/{stockname}/{index}", new StockPriceOfCompanyRestlet());
 
         return router;
     }

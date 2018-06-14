@@ -1,15 +1,13 @@
 package com.smsimulator.server.root;
 
-import com.smsimulator.core.CompanyStock;
-import com.smsimulator.core.DBUtils;
-import com.smsimulator.core.Market;
-import com.smsimulator.core.Sector;
+import com.smsimulator.core.*;
 import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by skaveesh on 2018-05-21.
@@ -41,7 +39,18 @@ public class Main extends InboundRoot {
         component.start();
 
         //initialize stocks
-        initializeStocks();
+        Broker.generateNewStock();
+
+        for(Sector sector:new Broker().getSectorList()){
+            if(sector.sectorName.equalsIgnoreCase("financial sector")){
+                for (CompanyStock companyStock:sector.stockList){
+                    System.out.println(companyStock.getStockName() + " " + companyStock.getStockPrice(0));
+                }
+                break;
+            }
+        }
+
+       // System.out.println("HNB stock "+ new Broker().price("HNB", 10));
     }
 
     public static int getTURN() {
@@ -52,7 +61,7 @@ public class Main extends InboundRoot {
         return ++TURN;
     }
 
-    private static void initializeStocks() {
+    public static List<Sector> initializeStocks() {
 
         //==================Market==================//
 
@@ -60,9 +69,9 @@ public class Main extends InboundRoot {
 
         //==================Sectors==================//
 
-        Sector financialSector = new Sector();
-        Sector technologicalSector = new Sector();
-        Sector manufacturingSector = new Sector();
+        Sector financialSector = new Sector("Financial Sector");
+        Sector technologicalSector = new Sector("Technological Sector");
+        Sector manufacturingSector = new Sector("Manufacturing Sector");
 
         //==================Stocks==================//
 
@@ -117,9 +126,10 @@ public class Main extends InboundRoot {
 
 
         //get stock prices of certain companies BEFORE increasing value by 5
-        System.out.println(hattonNationalBank.getStockPrice(4));
+//        System.out.println(hattonNationalBank.getStockPrice(4));
+        System.out.println(hattonNationalBank.getStockPrice(16));
         System.out.println(lolc.getStockPrice(16));
-        System.out.println(softlogic.getStockPrice(3));
+//        System.out.println(softlogic.getStockPrice(3));
 
         //increase financial sector values by 5
         for (CompanyStock stock : stockMarket.sectorList.get(stockMarket.sectorList.indexOf(financialSector)).stockList) {
@@ -129,9 +139,10 @@ public class Main extends InboundRoot {
         }
 
         //get stock prices of certain companies AFTER increasing value by 5
-        System.out.println(hattonNationalBank.getStockPrice(4));
-        System.out.println(lolc.getStockPrice(16));
-        System.out.println(softlogic.getStockPrice(3));
+//        System.out.println(hattonNationalBank.getStockPrice(4));
+//        System.out.println(lolc.getStockPrice(16));
+//        System.out.println(softlogic.getStockPrice(3));
 
+        return stockMarket.sectorList;
     }
 }
