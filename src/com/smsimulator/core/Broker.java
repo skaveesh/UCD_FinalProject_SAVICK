@@ -110,7 +110,7 @@ public class Broker {
             }
 
         } catch (SQLException e) {
-
+            return null;
         }
 
         //initialize portfolio object and return it

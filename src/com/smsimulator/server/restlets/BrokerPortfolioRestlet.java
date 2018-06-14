@@ -26,18 +26,22 @@ public class BrokerPortfolioRestlet extends Restlet {
             if (playerUid != -1) {
                 Portfolio portfolio = new Broker().portfolio((String) request.getAttributes().get("name"));
 
-                //response gson object
-                com.smsimulator.gsoncore.Portfolio portfolio1 = new com.smsimulator.gsoncore.Portfolio();
-                portfolio1.setName(portfolio.getName());
-                portfolio1.setOwnStockList(portfolio.getOwnStockList());
-                portfolio1.setBroughtStockList(portfolio.getBroughtStockList());
-                portfolio1.setSoldStockList(portfolio.getSoldStockList());
+                if(portfolio != null) {
+                    //response gson object
+                    com.smsimulator.gsoncore.Portfolio portfolio1 = new com.smsimulator.gsoncore.Portfolio();
+                    portfolio1.setName(portfolio.getName());
+                    portfolio1.setOwnStockList(portfolio.getOwnStockList());
+                    portfolio1.setBroughtStockList(portfolio.getBroughtStockList());
+                    portfolio1.setSoldStockList(portfolio.getSoldStockList());
 
-                BrokerPortfolio brokerPortfolio = new BrokerPortfolio();
-                brokerPortfolio.setPortfolio(portfolio1);
+                    BrokerPortfolio brokerPortfolio = new BrokerPortfolio();
+                    brokerPortfolio.setPortfolio(portfolio1);
 
-                response.setEntity(InboundRoot.gson.toJson(brokerPortfolio), MediaType.APPLICATION_JSON);
-                response.setStatus(Status.SUCCESS_OK);
+                    response.setEntity(InboundRoot.gson.toJson(brokerPortfolio), MediaType.APPLICATION_JSON);
+                    response.setStatus(Status.SUCCESS_OK);
+                }else {
+                    response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+                }
             } else
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
         } else {
