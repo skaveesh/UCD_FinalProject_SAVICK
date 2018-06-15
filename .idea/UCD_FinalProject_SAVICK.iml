@@ -12,5 +12,6 @@
     <orderEntry type="library" name="org.restlet" level="project" />
     <orderEntry type="library" name="mysql-connector" level="project" />
     <orderEntry type="library" name="mysql-connector" level="project" />
+    <orderEntry type="library" name="jBCrypt-0.4" level="project" />
   </component>
 </module>
