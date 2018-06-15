@@ -18,6 +18,7 @@ public class InboundRoot extends Application {
         Router router = new Router(getContext());
         router.attach("/", new WelcomeRestlet());
 
+        router.attach("/player/createaccount", new PlayerAccountCreateRestlet());
         router.attach("/player/login", new LoginPlayerRestlet());
 
         router.attach("/bank/createaccount", new BankAccountCreateRestlet());
