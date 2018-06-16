@@ -38,6 +38,32 @@ public class Bank {
     }
 
     /**
+     * check if bank account of player exists
+     * @param name username of player
+     * @return return true if account exists
+     */
+    public boolean checkExistenceOfAccount(String name){
+        int uid = new Player().getUidFromName(name);
+        boolean returnValue = false;
+
+        try {
+            if (uid != -1) {
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT * FROM bank_account WHERE uid=? LIMIT 1");
+                preparedStatement.setInt(1, uid);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    returnValue = true;
+                }
+                return returnValue;
+            } else
+                return false;
+        }catch (SQLException e){
+            return false;
+        }
+    }
+
+    /**
      * deposit money to player bank account by broker if player sell stocks
      * @param turn time in the game
      * @param name username of the player

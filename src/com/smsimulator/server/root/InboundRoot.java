@@ -21,13 +21,15 @@ public class InboundRoot extends Application {
         router.attach("/player/createaccount", new PlayerAccountCreateRestlet());
         router.attach("/player/login", new LoginPlayerRestlet());
 
-        router.attach("/bank/createaccount", new BankAccountCreateRestlet());
-        router.attach("/bank/deposit", new BankDepositRestlet());
-        router.attach("/bank/withdraw", new BankWithdrawRestlet());
-        router.attach("/bank/balance/{name}", new BankBalanceRestlet());
+        router.attach("/bank/account/createaccount", new BankAccountCreateRestlet());
+        router.attach("/bank/account/check/{name}", new BankAccountExistenceRestlet());
+        router.attach("/bank/account/deposit", new BankDepositRestlet());
+        router.attach("/bank/account/withdraw", new BankWithdrawRestlet());
+        router.attach("/bank/account/balance/{name}", new BankBalanceRestlet());
 
-        router.attach("/broker/createaccount", new BrokerAccountCreateRestlet());
-        router.attach("/broker/portfolio/{name}", new BrokerPortfolioRestlet());
+        router.attach("/broker/account/createaccount", new BrokerAccountCreateRestlet());
+        router.attach("/broker/account/check/{name}", new BrokerAccountExistenceRestlet());
+        router.attach("/broker/account/portfolio/{name}", new BrokerPortfolioRestlet());
         router.attach("/broker/stock/getall", new StockMarketRestlet());
         router.attach("/broker/stock/{stockname}", new StockPriceListOfCompanyRestlet());
         router.attach("/broker/stock/{stockname}/{index}", new StockPriceOfCompanyRestlet());

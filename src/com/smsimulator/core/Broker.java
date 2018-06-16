@@ -57,6 +57,32 @@ public class Broker {
     }
 
     /**
+     * check if broker account of player exists
+     * @param name username of player
+     * @return return true if account exists
+     */
+    public boolean checkExistenceOfAccount(String name){
+        int uid = new Player().getUidFromName(name);
+        boolean returnValue = false;
+
+        try {
+            if (uid != -1) {
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT * FROM broker_account WHERE uid=? LIMIT 1");
+                preparedStatement.setInt(1, uid);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    returnValue = true;
+                }
+                return returnValue;
+            } else
+                return false;
+        }catch (SQLException e){
+            return false;
+        }
+    }
+
+    /**
      * get the information from user portfolio
      * @param name username of the player
      * @return portfolio of the user which includes username, stock player owns, brought stocks, sold stocks
