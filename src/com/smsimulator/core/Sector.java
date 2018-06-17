@@ -9,6 +9,11 @@ import java.util.List;
 
 public class Sector {
     public List<CompanyStock> stockList = new ArrayList<>();
+    public String sectorName;
+
+    public Sector(String sectorName){
+        this.sectorName = sectorName;
+    }
 
     public void addToSector(CompanyStock stock){
         stockList.add(stock);

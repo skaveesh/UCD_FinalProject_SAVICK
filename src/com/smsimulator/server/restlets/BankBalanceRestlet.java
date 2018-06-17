@@ -2,10 +2,8 @@ package com.smsimulator.server.restlets;
 
 import com.smsimulator.core.Bank;
 import com.smsimulator.gsoncore.BalanceAmount;
-import com.smsimulator.gsoncore.BankBalance;
 import com.smsimulator.gsoncore.BankBalanceAmount;
 import com.smsimulator.server.root.InboundRoot;
-
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.Restlet;
@@ -20,8 +18,8 @@ public class BankBalanceRestlet extends Restlet {
     @Override
     public void handle(Request request, Response response) {
         if (request.getMethod().equals(Method.POST)) {
-            BankBalance bankBalance = InboundRoot.gson.fromJson(request.getEntityAsText(), BankBalance.class);
-            double currentBalanceAmount = new Bank().balance(bankBalance.getGetBalance().getName());
+
+            double currentBalanceAmount = new Bank().balance( (String) request.getAttributes().get("name"));
 
             if (currentBalanceAmount != -1) {
                 //response gson object

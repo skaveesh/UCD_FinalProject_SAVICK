@@ -1,45 +1,81 @@
 package com.smsimulator.core;
 
+import com.smsimulator.core.CompanyStock;
+import com.smsimulator.core.Sector;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class EventComponent {
-    private static void getRandomProbability(){
-        Random random = new Random();
-        double StockValues[] = new double[20];
-        String event;
 
+    private double eventsArray[] = new double[20];
+    Random random = new Random();
 
-        for(int i=0; i<StockValues.length; i++){
-            double prob = Math.random();
-            if(prob >= 0.33 && prob < 0.67){
-                String SelectionArray[] = {"Boom","Bust"};
-                int select =random.nextInt(SelectionArray.length);
-                event = SelectionArray[select];
+    public List<Sector> eventComponentGenerator(List<Sector> sectorList){
+        int randomEvent = new Random().nextInt(2);
+        if(randomEvent == 1){   // sectorEvent
+            sectorList = sectorEvent(sectorList);
+        } else {                //stockEvent
+            sectorList = stockEvent(sectorList);
+        }
+        return sectorList;
+    }
 
-                System.out.println(prob);
-                System.out.println(event);
-                if(event.equals("Boom")){
-                    Random r2 = new Random();
-                    for (int j= 0; j<StockValues.length; j++){
-                        StockValues[j]=r2.nextInt(6) + (1);
+    private List<Sector> sectorEvent(List<Sector> sectorList) {
+        int randomSectorNumberForSectorEvent = new Random().nextInt(sectorList.size());
+        Sector sectorForSectorEvent = sectorList.get(randomSectorNumberForSectorEvent);
 
-                    }
-                    System.out.println("StockValues is : "+ Arrays.toString(StockValues));
+        sectorList.set(randomSectorNumberForSectorEvent, sectorEventChangePrice(sectorForSectorEvent));
+        return sectorList;
+    }
+
+    private Sector sectorEventChangePrice(Sector sector){
+        String sectorEventsArray[] = {"BOOM","BUST"};
+        for (CompanyStock companyStock : sector.stockList) {
+            double[] stockPriceArray = companyStock.getStockPriceArray();
+
+            int sectorEventsTurns = random.nextInt(4) + (2);
+            for (int i = 0; i < sectorEventsTurns; i++) {
+                String selectedSectorEvent = sectorEventsArray[random.nextInt(sectorEventsArray.length)];
+                if (selectedSectorEvent.equals("BOOM")){
+                    // BOOM EVENT
+                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (1);
+                } else {
+                    // BUST EVENT
+                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-5);
+                }
+                if(stockPriceArray[i]<0){
+                    stockPriceArray[i] = 0;
                 }
             }
-            else if(prob >=0.67){
-                String SelectionArray[] = {"Profit_Warning", "Take_Over", "Scandal"};
+            companyStock.setStockArray(stockPriceArray);
+        }
+        return sector;
+    }
 
-                int select =random.nextInt(SelectionArray.length);
-                event = SelectionArray[select];
-                System.out.println(prob);
-                System.out.println(event);
+    private List<Sector> stockEvent(List<Sector> sectorList){
+        String stockEventsArray[] = {"PROFIT_WARNING","TAKE_OVER","SCANDAL"};
+        for(Sector sector : sectorList) {
+            for (CompanyStock companyStock : sector.stockList) {
+                double[] stockPriceArray = companyStock.getStockPriceArray();
+                int stockEventTurns = random.nextInt(7) + (1);
+                for (int i = 0; i < stockEventTurns; i++) {
+                    String selectedStockEvent = stockEventsArray[random.nextInt(stockEventsArray.length)];
+                    if (selectedStockEvent.equals("PROFIT_WARNING")){
+                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(2) + (2);
+                    } else if (selectedStockEvent.equals("TAKE_OVER")){
+                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-5);
+                    } else {
+                        // SCANDAL EVENT
+                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(3) + (-6);
+                    }
+                    if(stockPriceArray[i]<0){
+                        stockPriceArray[i] = 0;
+                    }
+                }
+                companyStock.setStockArray(stockPriceArray);
             }
         }
-    }
-    public static void main(String[] args) {
-        getRandomProbability();
+        return sectorList;
     }
 }

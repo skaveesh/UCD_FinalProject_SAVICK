@@ -3,8 +3,6 @@ package com.smsimulator.core;
 /**
  * Created by Dilhara on 6/11/2018.
  */
-
-
 public class CompanyStock {
 
     private double stockArray[] = new double[20];
@@ -27,8 +25,14 @@ public class CompanyStock {
         stockArray[index] = value ;
     }
 
+    public void setStockArray(double[] stockArray){ this.stockArray = stockArray; }
+
     public double getStockPrice(int index) {
         return ((0 <= index && index <20) ? stockArray[index] : -1);
+    }
+
+    public double[] getStockPriceArray() {
+        return stockArray;
     }
 
     public String getStockName()

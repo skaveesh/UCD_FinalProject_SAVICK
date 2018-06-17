@@ -17,8 +17,7 @@ public class Broker {
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
     private static List<Sector> sectorList;
-    Bank bank = new Bank();
-    Player player = new Player();
+
 
     /**
      * generating stock as static variable
@@ -29,7 +28,6 @@ public class Broker {
 
     /**
      * get sectors
-     *
      * @return get all the sectors of the market for each game. each sector includes corresponding company stocks
      */
     public List<Sector> getSectorList() {
@@ -38,7 +36,6 @@ public class Broker {
 
     /**
      * create account for player under broker
-     *
      * @param turn time of the game
      * @param name name of the portfolio
      * @return returns true if creation successful
@@ -48,7 +45,7 @@ public class Broker {
 
         if (uid != -1) {
             try {
-                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn, balance) VALUES(?,?,?)");
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn) VALUES(?,?)");
                 preparedStatement.setInt(1, uid);
                 preparedStatement.setInt(2, turn);
 
@@ -61,8 +58,33 @@ public class Broker {
     }
 
     /**
+     * check if broker account of player exists
+     * @param name username of player
+     * @return return true if account exists
+     */
+    public boolean checkExistenceOfAccount(String name){
+        int uid = new Player().getUidFromName(name);
+        boolean returnValue = false;
+
+        try {
+            if (uid != -1) {
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT * FROM broker_account WHERE uid=? LIMIT 1");
+                preparedStatement.setInt(1, uid);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    returnValue = true;
+                }
+                return returnValue;
+            } else
+                return false;
+        }catch (SQLException e){
+            return false;
+        }
+    }
+
+    /**
      * get the information from user portfolio
-     *
      * @param name username of the player
      * @return portfolio of the user which includes username, stock player owns, brought stocks, sold stocks
      */
@@ -124,11 +146,10 @@ public class Broker {
 
     /**
      * get the stock array of the company
-     *
      * @param stock stock name of the company
      * @return stock array of the company (because stock has 20 indices which displays to
-     * player, first 10 as stock history and from 11 to 20 it will displays to
-     * user as user level up in the game in each turn for the next 10 turns)
+     *                                     player, first 10 as stock history and from 11 to 20 it will displays to
+     *                                     user as user level up in the game in each turn for the next 10 turns)
      */
     public double[] price(String stock) {
         double[] companyStockPrice = new double[20];
@@ -147,14 +168,13 @@ public class Broker {
 
     /**
      * get stock price for certain index of the stock array
-     *
-     * @param stock                  stock name of the company
+     * @param stock stock name of the company
      * @param indexOfStockPriceArray stock index of the stock array
      * @return price of the stock in the index pass through the input parameters
      */
     public double price(String stock, int indexOfStockPriceArray) {
         double companyStockPrice = -1;
-
+      
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
             for (CompanyStock companyStock : sector.stockList) {
