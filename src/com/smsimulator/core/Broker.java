@@ -49,8 +49,9 @@ public class Broker {
                 preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn) VALUES(?,?)");
                 preparedStatement.setInt(1, uid);
                 preparedStatement.setInt(2, turn);
+                preparedStatement.executeUpdate();
 
-                return (preparedStatement.executeUpdate() > 0);
+                return true;
             } catch (SQLException e) {
                 return false;
             }
@@ -158,6 +159,7 @@ public class Broker {
      */
     public double[] price(String stock) {
         double[] companyStockPrice = new double[20];
+        stock = stock.toUpperCase();
 
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
@@ -180,6 +182,7 @@ public class Broker {
      */
     public double price(String stock, int indexOfStockPriceArray) {
         double companyStockPrice = -1;
+        stock = stock.toUpperCase();
 
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
@@ -202,6 +205,7 @@ public class Broker {
      */
     public boolean buy(int turn, String name, String stock, int quantity, double price) {
         int uid = new Player().getUidFromName(name);
+        stock = stock.toUpperCase();
 
         if (uid != -1 && quantity > 0 && price > 0) {
 
@@ -221,8 +225,9 @@ public class Broker {
                     preparedStatement.setInt(3, quantity);
                     preparedStatement.setDouble(4, price);
                     preparedStatement.setInt(5, turn);
+                    preparedStatement.executeUpdate();
 
-                    return (preparedStatement.executeUpdate() > 0);
+                    return true;
                 } catch (SQLException e) {
                     return false;
                 }
@@ -244,6 +249,7 @@ public class Broker {
     public boolean sell(int turn, String name, String stock, int quantity, double price) {
         int uid = new Player().getUidFromName(name);
         double amount = quantity * price;
+        stock = stock.toUpperCase();
 
         if (uid != -1 && quantity > 0 && price > 0) {
 
@@ -271,7 +277,8 @@ public class Broker {
                         preparedStatement.setDouble(4, price);
                         preparedStatement.setInt(5, turn);
 
-                        return (preparedStatement.executeUpdate() > 0);
+                        preparedStatement.executeUpdate();
+                        return true;
                     } else
                         return false;
 
@@ -280,6 +287,7 @@ public class Broker {
                 }
 
             } catch (SQLException e) {
+                e.printStackTrace();
                 return false;
             }
         } else
