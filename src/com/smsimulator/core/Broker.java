@@ -44,7 +44,7 @@ public class Broker {
 
         if (uid != -1) {
             try {
-                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn, balance) VALUES(?,?,?)");
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn) VALUES(?,?)");
                 preparedStatement.setInt(1, uid);
                 preparedStatement.setInt(2, turn);
 
