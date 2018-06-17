@@ -196,15 +196,15 @@ public class Broker {
      */
     public boolean buy(int turn, String name, String stock, int quantity, double price) {
         boolean bb;
-        int uid = player.getUidFromName(name);
-        double balance = bank.balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
+        int uid = new Player().getUidFromName(name);
+        double balance = new Bank().balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
         double amount = quantity * price;
         // Check if balace is less than quantity * price
         if (balance < amount) {
             return false;
         }
-        bb = bank.withdraw(turn, name, stock, amount);
-        if (bb == true) {
+        bb = new Bank().withdraw(turn, name, stock, amount);
+        if (bb) {
             if (uid != -1) {
                 try {
                     preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
@@ -233,11 +233,11 @@ public class Broker {
      */
     public boolean sell(int turn, String name, String stock, int quantity, double price) {
         boolean bb;
-        int uid = player.getUidFromName(name);
+        int uid = new Player().getUidFromName(name);
         double amount = quantity * price;
-        List<StockQuantity> ownStockList = new ArrayList<>();
+
         // Have to check "The transaction fails if the player does not have the specified quantity of stock"
-        bb = bank.deposit(turn, name, stock, amount);
+        bb = new Bank().deposit(turn, name, stock, amount);
         if (bb == true) {
             if (uid != -1) {
                 try {

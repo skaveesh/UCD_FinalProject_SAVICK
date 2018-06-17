@@ -56,8 +56,8 @@ public class MarketComponents {
         double[] stockPriceArray = companyStock.getStockPriceArray();
 
         for (int i = 0; i < 20; i++) {
-//            stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-2);
-            stockPriceArray[i] =  new Random().nextInt(5) + (-2);
+            stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-2);
+//            stockPriceArray[i] =  new Random().nextInt(5) + (-2);
             if (i > 0 && ((stockPriceArray[i - 1] - stockPriceArray[i] > 1) || (stockPriceArray[i - 1] - stockPriceArray[i] < -1))) {
                 stockPriceArray[i] = stockPriceArray[i - 1];
             }
@@ -73,8 +73,8 @@ public class MarketComponents {
             double[] newStockPriceArray = new double[20];
 
             for (int i = 0; i < 20; i++) {
-//                stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(7) + (-3);
-                stockPriceArray[i] = new Random().nextInt(7) + (-3);
+                stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(7) + (-3);
+//                stockPriceArray[i] = new Random().nextInt(7) + (-3);
                 if (i > 0 && ((stockPriceArray[i - 1] - stockPriceArray[i] > 1) || (stockPriceArray[i - 1] - stockPriceArray[i] < -1))) {
                     stockPriceArray[i] = stockPriceArray[i - 1];
                 }
@@ -93,8 +93,8 @@ public class MarketComponents {
                 double[] newStockPriceArray = new double[20];
 
                 for (int i = 0; i < 20; i++) {
-//                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(7) + (-3);
-                    stockPriceArray[i] = new Random().nextInt(7) + (-3);
+                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(7) + (-3);
+//                    stockPriceArray[i] = new Random().nextInt(7) + (-3);
                     if (i > 0 && ((stockPriceArray[i - 1] - stockPriceArray[i] > 1) || (stockPriceArray[i - 1] - stockPriceArray[i] < -1))) {
                         stockPriceArray[i] = stockPriceArray[i - 1];
                     }

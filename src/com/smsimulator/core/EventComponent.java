@@ -12,12 +12,11 @@ public class EventComponent {
     Random random = new Random();
 
     public List<Sector> eventComponentGenerator(List<Sector> sectorList){
-        int randomEvent = new Random().nextInt(2);
-        if(randomEvent == 1){   // sectorEvent
+         // sectorEvent
             sectorList = sectorEvent(sectorList);
-        } else {                //stockEvent
+            //stockEvent
             sectorList = stockEvent(sectorList);
-        }
+
         return sectorList;
     }
 
