@@ -206,7 +206,7 @@ public class Broker {
             return false;
         }
         bb = new Bank().withdraw(turn, name, stock, amount);
-        if (bb) {
+        if (bb == true) {
             if (uid != -1) {
                 try {
                     preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
