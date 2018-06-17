@@ -253,17 +253,15 @@ public class Broker {
                     while (resultSet.next()) {
                         if (resultSet.getInt(1) >= amount) {
                             return false;
-                        } else
-
-                            // How to sell?
-
-                        preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
-                        preparedStatement.setString(1, stock);
-                        preparedStatement.setInt(2, quantity);
-                        preparedStatement.setDouble(3, price);
-                        preparedStatement.setInt(4, turn);
-                        preparedStatement.setInt(5, uid);
-                        return true;
+                        } else {
+                            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
+                            preparedStatement.setString(1, stock);
+                            preparedStatement.setInt(2, quantity);
+                            preparedStatement.setDouble(3, price);
+                            preparedStatement.setInt(4, turn);
+                            preparedStatement.setInt(5, uid);
+                            return true;
+                        }
                     }
                 } catch (SQLException e) {
                     return false;
