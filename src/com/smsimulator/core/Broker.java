@@ -18,6 +18,7 @@ public class Broker {
     private ResultSet resultSet;
     private static List<Sector> sectorList;
 
+
     /**
      * generating stock as static variable
      */
@@ -173,7 +174,7 @@ public class Broker {
      */
     public double price(String stock, int indexOfStockPriceArray) {
         double companyStockPrice = -1;
-
+      
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
             for (CompanyStock companyStock : sector.stockList) {
@@ -193,8 +194,34 @@ public class Broker {
      * @param quantity is stock quantity
      * @param price    is single stock current price
      */
-    public void buy(int turn, String name, String stock, int quantity, double price) {
-
+    public boolean buy(int turn, String name, String stock, int quantity, double price) {
+        boolean bb;
+        int uid = player.getUidFromName(name);
+        double balance = bank.balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
+        double amount = quantity * price;
+        // Check if balace is less than quantity * price
+        if (balance < amount) {
+            return false;
+        }
+        bb = bank.withdraw(turn, name, stock, amount);
+        if (bb == true) {
+            if (uid != -1) {
+                try {
+                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
+                    preparedStatement.setString(1, stock);
+                    preparedStatement.setInt(2, quantity);
+                    preparedStatement.setDouble(3, price);
+                    preparedStatement.setInt(4, turn);
+                    preparedStatement.setInt(5, uid);
+                    return true;
+                } catch (SQLException e) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     /**
@@ -204,8 +231,46 @@ public class Broker {
      * @param quantity is stock quantity
      * @param price    is single stock current price
      */
-    public void sell(int turn, String name, String stock, int quantity, double price) {
+    public boolean sell(int turn, String name, String stock, int quantity, double price) {
+        boolean bb;
+        int uid = player.getUidFromName(name);
+        double amount = quantity * price;
+        List<StockQuantity> ownStockList = new ArrayList<>();
+        // Have to check "The transaction fails if the player does not have the specified quantity of stock"
+        bb = bank.deposit(turn, name, stock, amount);
+        if (bb == true) {
+            if (uid != -1) {
+                try {
 
+                    // MySQL function call to get current stock along with quantity
+                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT sf_getUserStockQuantity (?, ?)");
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setString(2, stock);
+                    resultSet = preparedStatement.executeQuery();
+
+                    while (resultSet.next()) {
+                        if (resultSet.getInt(1) >= amount) {
+                            return false;
+                        } else
+
+                            // How to sell?
+
+                        preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
+                        preparedStatement.setString(1, stock);
+                        preparedStatement.setInt(2, quantity);
+                        preparedStatement.setDouble(3, price);
+                        preparedStatement.setInt(4, turn);
+                        preparedStatement.setInt(5, uid);
+                        return true;
+                    }
+                } catch (SQLException e) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
 }
