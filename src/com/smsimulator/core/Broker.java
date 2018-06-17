@@ -17,6 +17,8 @@ public class Broker {
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
     private static List<Sector> sectorList;
+    Player player = new Player();
+    Bank bank = new Bank();
 
 
     /**
