@@ -17,9 +17,6 @@ public class Broker {
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
     private static List<Sector> sectorList;
-    Player player = new Player();
-    Bank bank = new Bank();
-
 
     /**
      * generating stock as static variable
@@ -30,6 +27,7 @@ public class Broker {
 
     /**
      * get sectors
+     *
      * @return get all the sectors of the market for each game. each sector includes corresponding company stocks
      */
     public List<Sector> getSectorList() {
@@ -38,6 +36,7 @@ public class Broker {
 
     /**
      * create account for player under broker
+     *
      * @param turn time of the game
      * @param name name of the portfolio
      * @return returns true if creation successful
@@ -50,8 +49,9 @@ public class Broker {
                 preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO broker_account(uid, turn) VALUES(?,?)");
                 preparedStatement.setInt(1, uid);
                 preparedStatement.setInt(2, turn);
+                preparedStatement.executeUpdate();
 
-                return (preparedStatement.executeUpdate() > 0);
+                return true;
             } catch (SQLException e) {
                 return false;
             }
@@ -61,15 +61,16 @@ public class Broker {
 
     /**
      * check if broker account of player exists
+     *
      * @param name username of player
      * @return return true if account exists
      */
-    public boolean checkExistenceOfAccount(String name){
+    public boolean checkExistenceOfAccount(String name) {
         int uid = new Player().getUidFromName(name);
         boolean returnValue = false;
 
-        try {
-            if (uid != -1) {
+        if (uid != -1) {
+            try {
                 preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT * FROM broker_account WHERE uid=? LIMIT 1");
                 preparedStatement.setInt(1, uid);
                 resultSet = preparedStatement.executeQuery();
@@ -78,15 +79,17 @@ public class Broker {
                     returnValue = true;
                 }
                 return returnValue;
-            } else
+
+            } catch (SQLException e) {
                 return false;
-        }catch (SQLException e){
+            }
+        } else
             return false;
-        }
     }
 
     /**
      * get the information from user portfolio
+     *
      * @param name username of the player
      * @return portfolio of the user which includes username, stock player owns, brought stocks, sold stocks
      */
@@ -148,13 +151,15 @@ public class Broker {
 
     /**
      * get the stock array of the company
+     *
      * @param stock stock name of the company
      * @return stock array of the company (because stock has 20 indices which displays to
-     *                                     player, first 10 as stock history and from 11 to 20 it will displays to
-     *                                     user as user level up in the game in each turn for the next 10 turns)
+     * player, first 10 as stock history and from 11 to 20 it will displays to
+     * user as user level up in the game in each turn for the next 10 turns)
      */
     public double[] price(String stock) {
         double[] companyStockPrice = new double[20];
+        stock = stock.toUpperCase();
 
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
@@ -170,13 +175,15 @@ public class Broker {
 
     /**
      * get stock price for certain index of the stock array
-     * @param stock stock name of the company
+     *
+     * @param stock                  stock name of the company
      * @param indexOfStockPriceArray stock index of the stock array
      * @return price of the stock in the index pass through the input parameters
      */
     public double price(String stock, int indexOfStockPriceArray) {
         double companyStockPrice = -1;
-      
+        stock = stock.toUpperCase();
+
         SECTOR_LOOP:
         for (Sector sector : sectorList) {
             for (CompanyStock companyStock : sector.stockList) {
@@ -197,33 +204,39 @@ public class Broker {
      * @param price    is single stock current price
      */
     public boolean buy(int turn, String name, String stock, int quantity, double price) {
-        boolean bb;
         int uid = new Player().getUidFromName(name);
-        double balance = new Bank().balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
-        double amount = quantity * price;
-        // Check if balace is less than quantity * price
-        if (balance < amount) {
-            return false;
-        }
-        bb = new Bank().withdraw(turn, name, stock, amount);
-        if (bb == true) {
-            if (uid != -1) {
+
+        stock = stock.toUpperCase();
+
+        if (uid != -1 && quantity > 0 && price > 0) {
+
+            double balance = new Bank().balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
+            double amount = quantity * price;
+            // Check if balance is less than quantity * price
+            if (balance < amount) {
+                return false;
+            }
+
+            if (new Bank().withdraw(turn, name, stock, amount)) {
                 try {
-                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE buy_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
-                    preparedStatement.setString(1, stock);
-                    preparedStatement.setInt(2, quantity);
-                    preparedStatement.setDouble(3, price);
-                    preparedStatement.setInt(4, turn);
-                    preparedStatement.setInt(5, uid);
+                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO buy_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
+                    preparedStatement.setInt(1, uid);
+                    preparedStatement.setString(2, stock);
+                    preparedStatement.setInt(3, quantity);
+                    preparedStatement.setDouble(4, price);
+                    preparedStatement.setInt(5, turn);
+                    preparedStatement.executeUpdate();
+
                     return true;
                 } catch (SQLException e) {
                     return false;
                 }
-            } else {
+            } else
                 return false;
-            }
+
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -234,43 +247,51 @@ public class Broker {
      * @param price    is single stock current price
      */
     public boolean sell(int turn, String name, String stock, int quantity, double price) {
-        boolean bb;
         int uid = new Player().getUidFromName(name);
         double amount = quantity * price;
+        stock = stock.toUpperCase();
 
-        // Have to check "The transaction fails if the player does not have the specified quantity of stock"
-        bb = new Bank().deposit(turn, name, stock, amount);
-        if (bb == true) {
-            if (uid != -1) {
-                try {
+        if (uid != -1 && quantity > 0 && price > 0) {
 
-                    // MySQL function call to get current stock along with quantity
-                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT sf_getUserStockQuantity (?, ?)");
-                    preparedStatement.setString(1, name);
-                    preparedStatement.setString(2, stock);
-                    resultSet = preparedStatement.executeQuery();
+            try {
 
-                    while (resultSet.next()) {
-                        if (resultSet.getInt(1) >= amount) {
-                            return false;
-                        } else {
-                            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("UPDATE sell_stock SET stock=?,quantity=?,price=?,turn=? WHERE uid=?");
-                            preparedStatement.setString(1, stock);
-                            preparedStatement.setInt(2, quantity);
-                            preparedStatement.setDouble(3, price);
-                            preparedStatement.setInt(4, turn);
-                            preparedStatement.setInt(5, uid);
-                            return true;
-                        }
-                    }
-                } catch (SQLException e) {
+                int userOwnStockQuantity = 0;
+
+                // MySQL function call to get current stock along with quantity
+                preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT sf_getUserStockQuantity (?, ?)");
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, stock);
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    userOwnStockQuantity = resultSet.getInt(1);
+                }
+
+                if (userOwnStockQuantity >= quantity) {
+
+                    if (new Bank().deposit(turn, name, stock, amount)) {
+                        preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO sell_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
+                        preparedStatement.setInt(1, uid);
+                        preparedStatement.setString(2, stock);
+                        preparedStatement.setInt(3, quantity);
+                        preparedStatement.setDouble(4, price);
+                        preparedStatement.setInt(5, turn);
+
+                        preparedStatement.executeUpdate();
+                        return true;
+                    } else
+                        return false;
+
+                } else {
                     return false;
                 }
-            } else {
+
+            } catch (SQLException e) {
+                e.printStackTrace();
                 return false;
             }
-        }
-        return false;
+        } else
+            return false;
     }
 
 }

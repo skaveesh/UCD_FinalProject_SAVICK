@@ -29,7 +29,9 @@ public class Bank {
                 preparedStatement.setInt(1, uid);
                 preparedStatement.setInt(2, turn);
                 preparedStatement.setDouble(3, initialAmount);
-                return (preparedStatement.executeUpdate() > 0);
+                preparedStatement.executeUpdate();
+
+                return true;
             } catch (SQLException e) {
                 return false;
             }
@@ -81,8 +83,9 @@ public class Bank {
                 preparedStatement.setString(2, sender);
                 preparedStatement.setDouble(3, amount);
                 preparedStatement.setInt(4, turn);
+                preparedStatement.executeUpdate();
 
-                return (preparedStatement.executeUpdate() > 0);
+                return true;
             } catch (SQLException e) {
                 return false;
             }
@@ -109,7 +112,9 @@ public class Bank {
                 preparedStatement.setString(2, receiver);
                 preparedStatement.setDouble(3, amount);
                 preparedStatement.setInt(4, turn);
-                return (preparedStatement.executeUpdate() > 0);
+                preparedStatement.executeUpdate();
+
+                return true;
             } catch (SQLException e) {
                 return false;
             }

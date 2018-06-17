@@ -19,9 +19,4 @@ public class Sector {
         stockList.add(stock);
     }
 
-    public  void setNewStockValuesInSector(double value, int index){
-        for(CompanyStock stock:stockList){
-            stock.setNewStockValue(value,index);
-        }
-    }
 }

@@ -27,8 +27,9 @@ public class Player {
             preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO player(username, password) VALUES(?,?)");
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, hashedPassword);
+            preparedStatement.executeUpdate();
 
-            return (preparedStatement.executeUpdate() > 0);
+            return true;
         } catch (SQLException e) {
             return false;
         }
