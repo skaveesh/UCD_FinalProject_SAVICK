@@ -23,7 +23,6 @@ public class SectorTest {
         double testValue = 79.12;
         int testIndex = 2;
         testSector.addToSector(testStock);
-        testSector.setNewStockValuesInSector(testValue,testIndex);
         assertEquals(testValue,testStock.getStockPrice(testIndex),0.0f);
     }
 
