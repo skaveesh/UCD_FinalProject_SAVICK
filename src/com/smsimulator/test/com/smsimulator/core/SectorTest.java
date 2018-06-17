@@ -18,12 +18,6 @@ public class SectorTest {
         assertTrue(testSector.stockList.contains(testStock));
     }
 
-    @Test
-    public void setNewStockValuesInSector() throws Exception {
-        double testValue = 79.12;
-        int testIndex = 2;
-        testSector.addToSector(testStock);
-        assertEquals(testValue,testStock.getStockPrice(testIndex),0.0f);
-    }
+
 
 }
