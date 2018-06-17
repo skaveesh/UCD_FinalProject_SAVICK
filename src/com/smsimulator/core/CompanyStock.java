@@ -25,6 +25,8 @@ public class CompanyStock {
         stockArray[index] = value ;
     }
 
+    public void setStockArray(double[] stockArray){ this.stockArray = stockArray; }
+
     public double getStockPrice(int index) {
         return ((0 <= index && index <20) ? stockArray[index] : -1);
     }
