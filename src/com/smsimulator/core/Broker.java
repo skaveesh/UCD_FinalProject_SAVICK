@@ -205,6 +205,7 @@ public class Broker {
      */
     public boolean buy(int turn, String name, String stock, int quantity, double price) {
         int uid = new Player().getUidFromName(name);
+
         stock = stock.toUpperCase();
 
         if (uid != -1 && quantity > 0 && price > 0) {
@@ -217,7 +218,6 @@ public class Broker {
             }
 
             if (new Bank().withdraw(turn, name, stock, amount)) {
-
                 try {
                     preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO buy_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
                     preparedStatement.setInt(1, uid);
