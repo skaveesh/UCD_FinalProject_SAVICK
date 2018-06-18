@@ -26,6 +26,7 @@ public class InboundRoot extends Application {
         router.attach("/bank/account/deposit", new BankDepositRestlet());
         router.attach("/bank/account/withdraw", new BankWithdrawRestlet());
         router.attach("/bank/account/balance/{name}", new BankBalanceRestlet());
+        router.attach("/bank/account/profile/{name}", new BankProfileRestlet());
 
         router.attach("/broker/account/createaccount", new BrokerAccountCreateRestlet());
         router.attach("/broker/account/check/{name}", new BrokerAccountExistenceRestlet());
