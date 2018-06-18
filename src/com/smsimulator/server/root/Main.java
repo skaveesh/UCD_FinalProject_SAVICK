@@ -5,6 +5,7 @@ import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -121,7 +122,14 @@ public class Main extends InboundRoot {
 
         MarketComponents marketComponents = new MarketComponents();
         List<Sector> eventsAppliedSectorList = marketComponents.importSectors(stockMarket.sectorList);
+        //new AnalyserMain().importList(eventsAppliedSectorList);
 
-        return eventsAppliedSectorList;
+        //AnalyserMain anly = new AnalyserMain();
+        //anly.setRecomandedList();
+        Analyst analyst = new Analyst();
+        analyst.setRecomandations();
+
+        //return eventsAppliedSectorList;
+        return null;
     }
 }
