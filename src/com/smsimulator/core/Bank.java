@@ -3,6 +3,8 @@ package com.smsimulator.core;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by skaveesh on 2018-05-30.
@@ -142,6 +144,40 @@ public class Bank {
         } catch (SQLException e) {
             return -1;
         }
+    }
+
+    public Profile profile(String name){
+        double bankBalance;
+        List<BankTransaction> depositTransactionList = new ArrayList<>();
+        List<BankTransaction> withdrawTransactionList = new ArrayList<>();
+
+        try {
+            //get bank balance of the player bank account
+            bankBalance = balance(name);
+
+            //get all deposit transaction of the player
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT btd.sender, btd.amount, btd.turn FROM bank_transaction_deposit AS btd INNER JOIN player AS p ON btd.uid=p.uid WHERE p.username=?");
+            preparedStatement.setString(1, name);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                depositTransactionList.add(new BankTransaction(resultSet.getString("sender"),resultSet.getDouble("amount"),resultSet.getInt("turn")));
+            }
+
+            //get all withdraw transaction of the player
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT btw.receiver, btw.amount, btw.turn FROM bank_transaction_withdraw AS btw INNER JOIN player AS p ON btw.uid=p.uid WHERE p.username=?");
+            preparedStatement.setString(1, name);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                withdrawTransactionList.add(new BankTransaction(resultSet.getString("receiver"),resultSet.getDouble("amount"),resultSet.getInt("turn")));
+            }
+
+        }catch (SQLException e){
+            return null;
+        }
+
+        return new Profile(name, bankBalance, depositTransactionList, withdrawTransactionList);
     }
 
 }
