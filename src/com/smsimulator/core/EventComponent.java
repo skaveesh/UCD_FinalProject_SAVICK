@@ -8,9 +8,13 @@ import java.util.Random;
 
 public class EventComponent {
 
-    private double eventsArray[] = new double[20];
     Random random = new Random();
 
+    /**
+     * Check whether if sector event occur or an stock event
+     * @param sectorList initial sector values
+     * @return return changed sector list after applying events
+     */
     public List<Sector> eventComponentGenerator(List<Sector> sectorList){
          // sectorEvent
             sectorList = sectorEvent(sectorList);
@@ -20,6 +24,11 @@ public class EventComponent {
         return sectorList;
     }
 
+    /**
+     * Generate a random number to select sectors and apply events
+     * @param sectorList initial sector values
+     * @return return changed sector list after applying events
+     */
     private List<Sector> sectorEvent(List<Sector> sectorList) {
         int randomSectorNumberForSectorEvent = new Random().nextInt(sectorList.size());
         Sector sectorForSectorEvent = sectorList.get(randomSectorNumberForSectorEvent);
@@ -28,6 +37,11 @@ public class EventComponent {
         return sectorList;
     }
 
+    /**
+     * Change sector price depending on whether its a Boom or a Bust
+     * @param sector initial sector value
+     * @return return changed sector after applying event
+     */
     private Sector sectorEventChangePrice(Sector sector){
         String sectorEventsArray[] = {"BOOM","BUST"};
         for (CompanyStock companyStock : sector.stockList) {
@@ -38,10 +52,14 @@ public class EventComponent {
                 String selectedSectorEvent = sectorEventsArray[random.nextInt(sectorEventsArray.length)];
                 if (selectedSectorEvent.equals("BOOM")){
                     // BOOM EVENT
-                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (1);
+                    System.out.println("sectorEventChangePrice " +stockPriceArray[i]);
+                    double percentageValueForSectorEventBoom = Math.round((stockPriceArray[i]*(new Random().nextInt(5) + (1))/100)*100.0)/100.0;
+                    stockPriceArray[i] = stockPriceArray[i] + percentageValueForSectorEventBoom;
                 } else {
                     // BUST EVENT
-                    stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-5);
+                    double percentageValueForSectorEventBust = Math.round((stockPriceArray[i]*(new Random().nextInt(5) + (-5))/100)*100.0)/100.0;
+
+                    stockPriceArray[i] = stockPriceArray[i] + percentageValueForSectorEventBust;
                 }
                 if(stockPriceArray[i]<0){
                     stockPriceArray[i] = 0;
@@ -52,6 +70,11 @@ public class EventComponent {
         return sector;
     }
 
+    /**
+     * Select a stockEvent randomly and change the values accordingly
+     * @param sectorList initial sector list values
+     * @return return changed sector list after applying event
+     */
     private List<Sector> stockEvent(List<Sector> sectorList){
         String stockEventsArray[] = {"PROFIT_WARNING","TAKE_OVER","SCANDAL"};
         for(Sector sector : sectorList) {
@@ -61,16 +84,21 @@ public class EventComponent {
                 for (int i = 0; i < stockEventTurns; i++) {
                     String selectedStockEvent = stockEventsArray[random.nextInt(stockEventsArray.length)];
                     if (selectedStockEvent.equals("PROFIT_WARNING")){
-                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(2) + (2);
+                        double percentageValueForStockEventProfitWarning = Math.round((stockPriceArray[i]*(new Random().nextInt(2) + (2))/100)*100.0)/100.0;
+
+                        stockPriceArray[i] = stockPriceArray[i] + percentageValueForStockEventProfitWarning;
+
                     } else if (selectedStockEvent.equals("TAKE_OVER")){
-                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(5) + (-5);
+                        double percentageValueForStockEventTakeOver = Math.round((stockPriceArray[i]*(new Random().nextInt(5) + (-5))/100)*100.0)/100.0;
+
+                        stockPriceArray[i] = stockPriceArray[i] + percentageValueForStockEventTakeOver;
                     } else {
                         // SCANDAL EVENT
-                        stockPriceArray[i] = stockPriceArray[i] + new Random().nextInt(3) + (-6);
+                        double percentageValueForStockEventScandal = Math.round((stockPriceArray[i]*(new Random().nextInt(3) + (-6))/100)*100.0)/100.0;
+
+                        stockPriceArray[i] = stockPriceArray[i] + percentageValueForStockEventScandal;
                     }
-                    if(stockPriceArray[i]<0){
-                        stockPriceArray[i] = 0;
-                    }
+
                 }
                 companyStock.setStockArray(stockPriceArray);
             }
