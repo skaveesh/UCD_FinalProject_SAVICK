@@ -127,7 +127,10 @@ public class Main extends InboundRoot {
         //AnalyserMain anly = new AnalyserMain();
         //anly.setRecomandedList();
         Analyst analyst = new Analyst();
-        analyst.setRecomandations();
+        //AIPlayer ai = new AIPlayer();
+        analyst.setRecommendations();
+        //analyst.getRecommendations();
+       // ai.startToBuy();
 
         //return eventsAppliedSectorList;
         return null;
