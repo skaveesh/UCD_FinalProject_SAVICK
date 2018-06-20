@@ -133,8 +133,7 @@ public class Main extends InboundRoot {
         //analyst.getRecommendations();
        // ai.startToBuy();
 
-        //return eventsAppliedSectorList;
-        return null;
+        return eventsAppliedSectorList;
     }
 
 
