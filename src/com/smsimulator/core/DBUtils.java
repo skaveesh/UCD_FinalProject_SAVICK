@@ -20,6 +20,7 @@ public class DBUtils {
         //uncomment below line to connect to hosted database
         //databaseConnection = createMySqlConnection();
 
+
         // uncomment below line to connect to local database
         databaseConnection = createMySqlLocalConnection();
     }

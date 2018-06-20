@@ -47,7 +47,6 @@ public class Player {
 
             preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT password FROM player WHERE username=?");
             preparedStatement.setString(1, username);
-
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){

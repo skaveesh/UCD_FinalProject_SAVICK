@@ -42,6 +42,7 @@ public class Main extends InboundRoot {
         //initialize stocks
         Broker.generateNewStock();
 
+
     }
 
     public static int getTURN() {
@@ -135,4 +136,6 @@ public class Main extends InboundRoot {
         //return eventsAppliedSectorList;
         return null;
     }
+
+
 }
