@@ -22,7 +22,7 @@ public class GameSimulator {
     private Integer timeToStartTheGameInSec;
     @SerializedName("players")
     @Expose
-    private List<String> players = null;
+    private List<PlayerAndInitialBalance> players = null;
     @SerializedName("turn1")
     @Expose
     private List<PlayerTransactionsOfTurn> turn1 = null;
@@ -57,11 +57,10 @@ public class GameSimulator {
     public GameSimulator() {
     }
 
-    public GameSimulator(Boolean isGameReadyToStart, Boolean isGameStarted, Integer gameStartTurn, Integer timeToStartTheGameInSec) {
+    public GameSimulator(Boolean isGameReadyToStart, Boolean isGameStarted, Integer gameStartTurn) {
         this.isGameReadyToStart = isGameReadyToStart;
         this.isGameStarted = isGameStarted;
         this.gameStartTurn = gameStartTurn;
-        this.timeToStartTheGameInSec = timeToStartTheGameInSec;
     }
 
     public Boolean getIsGameReadyToStart() {
@@ -96,11 +95,11 @@ public class GameSimulator {
         this.timeToStartTheGameInSec = timeToStartTheGameInSec;
     }
 
-    public List<String> getPlayers() {
+    public List<PlayerAndInitialBalance> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<String> players) {
+    public void setPlayers(List<PlayerAndInitialBalance> players) {
         this.players = players;
     }
 

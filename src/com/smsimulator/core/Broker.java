@@ -219,15 +219,30 @@ public class Broker {
 
             if (new Bank().withdraw(turn, name, stock, amount)) {
                 try {
-                    preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO buy_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
-                    preparedStatement.setInt(1, uid);
-                    preparedStatement.setString(2, stock);
-                    preparedStatement.setInt(3, quantity);
-                    preparedStatement.setDouble(4, price);
-                    preparedStatement.setInt(5, turn);
-                    preparedStatement.executeUpdate();
 
-                    return true;
+                    //add this transaction to the current turn of the game
+                    PlayerTransactionsOfTurn playerTransactionsOfTurn = new PlayerTransactionsOfTurn();
+                    playerTransactionsOfTurn.setName(name);
+                    playerTransactionsOfTurn.setSellOrBuy("buy");
+                    playerTransactionsOfTurn.setStock(stock);
+                    playerTransactionsOfTurn.setQuantity(quantity);
+                    playerTransactionsOfTurn.setStockPrice(price);
+
+                    if (Game.addPlayerTransactionToTurn(playerTransactionsOfTurn)) {
+
+                        preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO buy_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
+                        preparedStatement.setInt(1, uid);
+                        preparedStatement.setString(2, stock);
+                        preparedStatement.setInt(3, quantity);
+                        preparedStatement.setDouble(4, price);
+                        preparedStatement.setInt(5, turn);
+                        preparedStatement.executeUpdate();
+
+                        return true;
+
+                    } else
+                        return false;
+
                 } catch (SQLException e) {
                     return false;
                 }
@@ -269,16 +284,30 @@ public class Broker {
 
                 if (userOwnStockQuantity >= quantity) {
 
-                    if (new Bank().deposit(turn, name, stock, amount)) {
-                        preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO sell_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
-                        preparedStatement.setInt(1, uid);
-                        preparedStatement.setString(2, stock);
-                        preparedStatement.setInt(3, quantity);
-                        preparedStatement.setDouble(4, price);
-                        preparedStatement.setInt(5, turn);
+                    //add this transaction to the current turn of the game
+                    PlayerTransactionsOfTurn playerTransactionsOfTurn = new PlayerTransactionsOfTurn();
+                    playerTransactionsOfTurn.setName(name);
+                    playerTransactionsOfTurn.setSellOrBuy("sell");
+                    playerTransactionsOfTurn.setStock(stock);
+                    playerTransactionsOfTurn.setQuantity(quantity);
+                    playerTransactionsOfTurn.setStockPrice(price);
 
-                        preparedStatement.executeUpdate();
-                        return true;
+                    if (Game.addPlayerTransactionToTurn(playerTransactionsOfTurn)) {
+
+                        if (new Bank().deposit(turn, name, stock, amount)) {
+                            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("INSERT INTO sell_stock(uid, stock, quantity, price, turn) VALUES(?, ?, ?, ?, ?)");
+                            preparedStatement.setInt(1, uid);
+                            preparedStatement.setString(2, stock);
+                            preparedStatement.setInt(3, quantity);
+                            preparedStatement.setDouble(4, price);
+                            preparedStatement.setInt(5, turn);
+                            preparedStatement.executeUpdate();
+
+                            return true;
+
+                        } else
+                            return false;
+
                     } else
                         return false;
 

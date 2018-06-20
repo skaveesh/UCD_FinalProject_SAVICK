@@ -1,7 +1,6 @@
 package com.smsimulator.server.restlets;
 
-import com.smsimulator.core.Game;
-import com.smsimulator.core.Player;
+import com.smsimulator.core.*;
 import org.restlet.Request;
 import org.restlet.Response;
 import org.restlet.Restlet;
@@ -20,7 +19,7 @@ public class GameReadyRestlet extends Restlet {
             String playerName = (String) request.getAttributes().get("name");
             int playerUid = new Player().getUidFromName(playerName);
 
-            if(playerUid != -1) {
+            if(playerUid != -1 && new Bank().checkExistenceOfAccount(playerName) && new Broker().checkExistenceOfAccount(playerName)) {
 
                 if(!Game.getIsGameStarted()) {
 
@@ -28,8 +27,8 @@ public class GameReadyRestlet extends Restlet {
 
                         boolean isPlayerAlreadyInThePlayersList = false;
                         //check if player has already name in the game player list
-                        for(String playerNameInTheList : Game.getPlayerList()){
-                            if(playerNameInTheList.equals(playerName)) {
+                        for(PlayerAndInitialBalance playerNameInTheList : Game.getPlayerList()){
+                            if(playerNameInTheList.getName().equals(playerName)) {
                                 isPlayerAlreadyInThePlayersList = true;
                                 break;
                             }
@@ -41,7 +40,7 @@ public class GameReadyRestlet extends Restlet {
                             Game.addToPlayerList(playerName);
 
                     } else {
-                        Game.initializeGame();
+                        Game.play();
                         Game.addToPlayerList(playerName);
                         response.setStatus(Status.SUCCESS_OK);
                     }

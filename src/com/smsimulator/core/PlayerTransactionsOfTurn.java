@@ -8,12 +8,6 @@ public class PlayerTransactionsOfTurn {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("startBalance")
-    @Expose
-    private Double startBalance;
-    @SerializedName("currentBalance")
-    @Expose
-    private Double currentBalance;
     @SerializedName("sellOrBuy")
     @Expose
     private String sellOrBuy;
@@ -33,22 +27,6 @@ public class PlayerTransactionsOfTurn {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Double getStartBalance() {
-        return startBalance;
-    }
-
-    public void setStartBalance(Double startBalance) {
-        this.startBalance = startBalance;
-    }
-
-    public Double getCurrentBalance() {
-        return currentBalance;
-    }
-
-    public void setCurrentBalance(Double currentBalance) {
-        this.currentBalance = currentBalance;
     }
 
     public String getSellOrBuy() {
