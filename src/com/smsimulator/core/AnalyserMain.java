@@ -8,6 +8,10 @@ import java.util.List;
  */
 public class AnalyserMain {
 
+    //use this array to get stock
+    List<Sector> sectorList = new Broker().getSectorList();
+
+
     public String[] listStocks = {"Buy HNB","Buy TAB","Sell SUN","Buy SIRA","Sell GSK","Sell DLT","Buy UNI","Buy MGC","Buy SHL","Sell JKH"};
 
     public void importList(){

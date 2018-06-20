@@ -15,6 +15,10 @@ import java.util.TimerTask;
  */
 public class Game {
 
+    private static final int TIME_TO_READY_IN_SEC = 20;
+    private static final int TIME_FOR_EACH_TURN_IN_SEC = 2;
+    private static final int PLAYERS_LIMIT = 2;
+
     static private int gameStartedTurn = -1;
 
     static private boolean isGameReadyToStart = true;
@@ -33,76 +37,117 @@ public class Game {
     static private List<PlayerTransactionsOfTurn> turn9 = new ArrayList<>();
     static private List<PlayerTransactionsOfTurn> turn10 = new ArrayList<>();
 
-    static private GameSimulator gameSimulator;
+    static private GameSimulator gameSimulator = new GameSimulator(true, false, gameStartedTurn);
 
-    private static int timeToStartTheGameInSec = 10; //initially every player has 60 seconds to join the game
-    private static int timeToStartTheNextRoundInSec = 20; //every round has 30 seconds to player to do a transaction
+    private static int timeToStartTheGameInSec = TIME_TO_READY_IN_SEC; //initially every player has 60 seconds to join the game
 
     private static int turnCounter = 0;
 
     private static Timer timeToStartTheGameTimer;
     private static Timer timeToStartNextRoundTimer;
 
-    private static TimerTask timeToStartTheGameCounterTimerTask = new TimerTask() {
+    private static PlayerTransactionsOfTurn[] aiPlayerTransactions;
 
-        @Override
-        public void run() {
-            System.out.println("time to join the game is: " + timeToStartTheGameInSec);
-            timeToStartTheGameInSec--; //decrements the counter
-            gameSimulator.setTimeToStartTheGameInSec(timeToStartTheGameInSec);
-            isGameReadyToStart = false;
 
-            if (timeToStartTheGameInSec == 0) {
-                isGameStarted = true;
-                gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
-                gameSimulator.setIsGameStarted(isGameStarted);
+    private static void startReadyCounter() {
+        timeToStartTheGameTimer = new Timer("Time to join the game in seconds");//create a new Timer
 
-                timeToStartTheGameTimer.cancel();
-                timeToStartNextRoundTimer = new Timer("Time to start a new round");//create a new Timer;
-                timeToStartNextRoundTimer.scheduleAtFixedRate(timeToStartTheNextRoundCounterTimerTask, 10, timeToStartTheNextRoundInSec * 1000);
-            }
-        }
-    };
+        TimerTask timeToStartTheGameCounterTimerTask = new TimerTask() {
 
-    private static TimerTask timeToStartTheNextRoundCounterTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("time to join the game is: " + timeToStartTheGameInSec);
+                timeToStartTheGameInSec--; //decrements the counter
+                gameSimulator.setTimeToStartTheGameInSec(timeToStartTheGameInSec);
+                isGameReadyToStart = false;
 
-        @Override
-        public void run() {
+                if (timeToStartTheGameInSec == 0 && playerList.size() >= PLAYERS_LIMIT) {
+                    isGameStarted = true;
+                    gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
+                    gameSimulator.setIsGameStarted(isGameStarted);
 
-            if (turnCounter == 10) {
-                System.out.println("game end");
+                    timeToStartTheGameTimer.cancel();
+                    startTurnCounter();
 
-                //stop timer and set turn counter to 0
-                timeToStartNextRoundTimer.cancel();
-                turnCounter = 0;
+                    aiPlayerTransactions = getAIPlayerActions();
+                }else if (timeToStartTheGameInSec == 0) {
+                    timeToStartTheGameTimer.cancel();
 
-                isGameReadyToStart = true;
-                isGameStarted = false;
-                gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
-                gameSimulator.setIsGameStarted(isGameStarted);
+                    System.out.println("not starting game because not enough players");
+                    timeToStartTheGameInSec = TIME_TO_READY_IN_SEC;
 
-                //save each user to scoreboard table of the database
-                int gameEndTurn = Main.getTURN();
+                    isGameReadyToStart = true;
+                    isGameStarted = false;
+                    gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
+                    gameSimulator.setIsGameStarted(isGameStarted);
 
-                for (PlayerAndInitialBalance playerAndInitialBalance : playerList) {
-                    int playerUid = new Player().getUidFromName(playerAndInitialBalance.getName());
-                    double currentPlayerBalance = new Bank().balance(playerAndInitialBalance.getName());
-
-                    savePlayersToScoreBoard(playerUid, gameStartedTurn, gameEndTurn, playerAndInitialBalance.getStartBalance(), currentPlayerBalance);
+                    //clear player list and turn information
+                    clearPlayerListAndTurnInformation();
                 }
-
-                //clear player list and turn information
-                clearPlayerListAndTurnInformation();
-
-                //reset the stock market
-                Broker.generateNewStock();
-
-            } else {
-                turnCounter++;
-                System.out.println("now begins the turn : " + turnCounter);
             }
-        }
-    };
+        };
+
+        timeToStartTheGameTimer.scheduleAtFixedRate(timeToStartTheGameCounterTimerTask, 10, 1000);
+    }
+
+    private static void startTurnCounter() {
+
+        timeToStartNextRoundTimer = new Timer("Time to start a new round");//create a new Timer;
+
+        TimerTask timeToStartTheNextRoundCounterTimerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+
+                if (turnCounter == 10) {
+                    System.out.println("game end");
+
+                    //stop timer and set turn counter to 0
+                    timeToStartNextRoundTimer.cancel();
+                    turnCounter = 0;
+                    timeToStartTheGameInSec = TIME_TO_READY_IN_SEC;
+
+                    isGameReadyToStart = true;
+                    isGameStarted = false;
+                    gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
+                    gameSimulator.setIsGameStarted(isGameStarted);
+
+                    //save each user to scoreboard table of the database
+                    int gameEndTurn = Main.getTURN();
+
+                    for (PlayerAndInitialBalance playerAndInitialBalance : playerList) {
+                        int playerUid = new Player().getUidFromName(playerAndInitialBalance.getName());
+                        double currentPlayerBalance = new Bank().balance(playerAndInitialBalance.getName());
+
+                        savePlayersToScoreBoard(playerUid, gameStartedTurn, gameEndTurn, playerAndInitialBalance.getStartBalance(), currentPlayerBalance);
+                    }
+
+                    //clear player list and turn information
+                    clearPlayerListAndTurnInformation();
+
+                    //reset the stock market
+                    Broker.generateNewStock();
+
+                } else {
+                    turnCounter++;
+
+                    if(aiPlayerTransactions[turnCounter-1] != null){
+                        PlayerTransactionsOfTurn aiPlayerTransaction = aiPlayerTransactions[turnCounter-1];
+                        if(aiPlayerTransaction.getSellOrBuy().equals("sell")){
+                            new Broker().sell(Main.nextTURN(),aiPlayerTransaction.getName(),aiPlayerTransaction.getStock(),aiPlayerTransaction.getQuantity(),aiPlayerTransaction.getStockPrice());
+                        }else if (aiPlayerTransaction.getSellOrBuy().equals("buy")){
+                            new Broker().buy(Main.nextTURN(),aiPlayerTransaction.getName(),aiPlayerTransaction.getStock(),aiPlayerTransaction.getQuantity(),aiPlayerTransaction.getStockPrice());
+                        }
+                    }
+
+                    System.out.println("now begins the turn : " + turnCounter);
+                }
+            }
+        };
+
+        timeToStartNextRoundTimer.scheduleAtFixedRate(timeToStartTheNextRoundCounterTimerTask, 10, TIME_FOR_EACH_TURN_IN_SEC * 1000);
+
+    }
 
     public static void play() {
 
@@ -112,9 +157,10 @@ public class Game {
 
         gameSimulator = new GameSimulator(isGameReadyToStart, isGameStarted, gameStartedTurn);
 
-        timeToStartTheGameTimer  = new Timer("Time to join the game in seconds");//create a new Timer
-        timeToStartTheGameTimer.scheduleAtFixedRate(timeToStartTheGameCounterTimerTask, 10, 1000);
+        startReadyCounter();
 
+        //add AI Player to players list
+        addToPlayerList("AIPlayer");
     }
 
     public GameSimulator getCurrentGame() {
@@ -133,6 +179,16 @@ public class Game {
         gameSimulator.setTurn10(turn10);
 
         return gameSimulator;
+    }
+
+    private static PlayerTransactionsOfTurn[] getAIPlayerActions(){
+        AIPlayer aiPlayer = new AIPlayer();
+        return aiPlayer.getPlayerTransactionsOfTurnsArray();
+    }
+
+    private static String[] getAnalyserRecommendations(){
+        Analyst analyst = new Analyst();
+        return analyst.getRecommendations();
     }
 
     public static void addToPlayerList(String playerName) {
@@ -231,7 +287,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn1)) {
             turn1.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -239,7 +295,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn2)) {
             turn2.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -247,7 +303,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn3)) {
             turn3.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -255,7 +311,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn4)) {
             turn4.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -263,7 +319,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn5)) {
             turn5.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -271,7 +327,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn6)) {
             turn6.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -279,7 +335,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn7)) {
             turn7.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -287,7 +343,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn8)) {
             turn8.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -295,7 +351,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn9)) {
             turn9.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
@@ -303,7 +359,7 @@ public class Game {
         if (!checkIfPlayerHasTransactionInTheCurrentTurn(playerTransactionsOfTurn, turn10)) {
             turn10.add(playerTransactionsOfTurn);
             return true;
-        }else
+        } else
             return false;
     }
 
