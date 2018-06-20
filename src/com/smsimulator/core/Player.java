@@ -3,6 +3,10 @@ package com.smsimulator.core;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.smsimulator.server.root.Main;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
