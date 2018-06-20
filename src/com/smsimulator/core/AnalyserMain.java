@@ -1,6 +1,8 @@
 package com.smsimulator.core;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,6 +39,28 @@ public class AnalyserMain {
             System.out.println(e);
             System.out.println("List Fail");
         }*/
+    }
+
+    protected double[] getCompanyStockArrayByStockName(String stockName){
+        double[] stockArray = new double[10];
+        for(Sector sector : new Broker().getSectorList()){
+            for (CompanyStock companyStock : sector.stockList){
+                if(companyStock.getStockName().equals(stockName)){
+                    stockArray = Arrays.copyOfRange(companyStock.getStockPriceArray(), 10,20);
+                }
+            }
+        }
+        return stockArray;
+    }
+
+    protected List<String> getAllCompanyStockNames(){
+        List<String> companyStockNames = new ArrayList<>();
+        for(Sector sector : new Broker().getSectorList()){
+            for (CompanyStock companyStock : sector.stockList){
+                companyStockNames.add(companyStock.getStockName());
+            }
+        }
+        return companyStockNames;
     }
 
 }
