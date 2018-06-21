@@ -27,5 +27,4 @@ public class BankWithdrawRestlet extends Restlet {
             response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
         }
     }
-
 }
