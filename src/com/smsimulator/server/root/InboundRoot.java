@@ -20,11 +20,10 @@ public class InboundRoot extends Application {
 
         router.attach("/player/createaccount", new PlayerAccountCreateRestlet());
         router.attach("/player/login", new LoginPlayerRestlet());
+        router.attach("/player/scoreboard/{startturn}", new ScoreboardRestlet());
 
         router.attach("/bank/account/createaccount", new BankAccountCreateRestlet());
         router.attach("/bank/account/check/{name}", new BankAccountExistenceRestlet());
-        router.attach("/bank/account/deposit", new BankDepositRestlet());
-        router.attach("/bank/account/withdraw", new BankWithdrawRestlet());
         router.attach("/bank/account/balance/{name}", new BankBalanceRestlet());
         router.attach("/bank/account/profile/{name}", new BankProfileRestlet());
 
@@ -39,6 +38,7 @@ public class InboundRoot extends Application {
 
         router.attach("/game/ready/{name}", new GameReadyRestlet());
         router.attach("/game/status", new GameStatusRestlet());
+        router.attach("/game/analyser/recommendation", new AnalyserRecommendationRestlet());
 
         return router;
     }

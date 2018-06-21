@@ -84,4 +84,23 @@ public class Player {
             return -1;
         }
     }
+
+    public List<Score> getPlayerScoreboard(int startTurn){
+        List<Score> scoreList = new ArrayList<>();
+
+        try {
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT p.username, sc.start_balance, sc.end_balance, sc.end_balance - sc.start_balance AS profit FROM scoreboard AS sc INNER JOIN player AS p ON sc.uid=p.uid WHERE sc.start_turn=?");
+            preparedStatement.setInt(1, startTurn);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Score score = new Score(resultSet.getString("username"),resultSet.getDouble("start_balance"),resultSet.getDouble("end_balance"),resultSet.getDouble("profit"));
+                scoreList.add(score);
+            }
+
+            return scoreList;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

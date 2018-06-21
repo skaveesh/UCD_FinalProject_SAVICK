@@ -11,7 +11,7 @@ public class Analyst extends AnalyserMain {
     public String[] setArray;
     public String suggestion = "";
 
-    public void setRecommendations(){
+    public void setRecommendations() {
         setArray = listAnalyt.listStocks;
 
         /*for (int i=0; i<setArray.length; i++){
@@ -21,7 +21,7 @@ public class Analyst extends AnalyserMain {
 
         int playerTurn = new Random().nextInt(10);
 
-        switch(playerTurn){
+        switch (playerTurn) {
             case 1:
                 suggestion = setArray[0];
                 System.out.println(suggestion);
@@ -77,9 +77,7 @@ public class Analyst extends AnalyserMain {
         //return suggestion;
     }
 
-    public String[] getRecommendations(){
-        System.out.println("List Returned");
-
-        return this.setArray;
+    public String[] getRecommendations() {
+        return listStocks;
     }
 }
