@@ -130,8 +130,8 @@ public class Main extends InboundRoot {
         Analyst analyst = new Analyst();
         analyst.setRecomandations();
 
-        //return eventsAppliedSectorList;
-        return null;
+        return eventsAppliedSectorList;
+        //return null;
     }
 
 

@@ -37,7 +37,7 @@ public class BankTest {
     public void withdraw() throws Exception {
         DBUtils dbtest = new DBUtils();
         //assert that the withdraw method executes successfully
-        assertTrue(testBank.withdraw(3,"dilhara","HNB",96.46));
+        assertTrue(testBank.withdraw(3,"dilhara","HNB",96.50));
     }
 
     @Test
