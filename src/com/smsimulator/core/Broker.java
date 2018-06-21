@@ -208,7 +208,7 @@ public class Broker {
 
         stock = stock.toUpperCase();
 
-        if (uid != -1 && quantity > 0 && price > 0) {
+        if (uid != -1 && quantity > 0 && price > 0 && Game.getIsGameStarted()) {
 
             double balance = new Bank().balance(name); // (Check balance and throw error if insufficient funds) This is to my knowledge handled in the stored procedure which works with the withdraw function
             double amount = quantity * price;
@@ -266,7 +266,7 @@ public class Broker {
         double amount = quantity * price;
         stock = stock.toUpperCase();
 
-        if (uid != -1 && quantity > 0 && price > 0) {
+        if (uid != -1 && quantity > 0 && price > 0 && Game.getIsGameStarted()) {
 
             try {
 

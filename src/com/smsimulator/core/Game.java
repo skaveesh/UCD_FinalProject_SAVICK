@@ -15,9 +15,9 @@ import java.util.TimerTask;
  */
 public class Game {
 
-    private static final int TIME_TO_READY_IN_SEC = 20;
-    private static final int TIME_FOR_EACH_TURN_IN_SEC = 2;
-    private static final int PLAYERS_LIMIT = 2;
+    private static final int TIME_TO_READY_IN_SEC = 60;
+    private static final int TIME_FOR_EACH_TURN_IN_SEC = 30;
+    private static final int MINIMUM_PLAYERS_LIMIT = 2;
 
     static private int gameStartedTurn = -1;
 
@@ -49,19 +49,19 @@ public class Game {
     private static PlayerTransactionsOfTurn[] aiPlayerTransactions;
 
 
-    private static void startReadyCounter() {
+    private static void startReadyCounter() throws NullPointerException {
         timeToStartTheGameTimer = new Timer("Time to join the game in seconds");//create a new Timer
 
         TimerTask timeToStartTheGameCounterTimerTask = new TimerTask() {
 
             @Override
             public void run() {
-                System.out.println("time to join the game is: " + timeToStartTheGameInSec);
+                Debugger.log("time to join the game is: " + timeToStartTheGameInSec);
                 timeToStartTheGameInSec--; //decrements the counter
                 gameSimulator.setTimeToStartTheGameInSec(timeToStartTheGameInSec);
                 isGameReadyToStart = false;
 
-                if (timeToStartTheGameInSec == 0 && playerList.size() >= PLAYERS_LIMIT) {
+                if (timeToStartTheGameInSec == 0 && playerList.size() >= MINIMUM_PLAYERS_LIMIT) {
                     isGameStarted = true;
                     gameSimulator.setIsGameReadyToStart(isGameReadyToStart);
                     gameSimulator.setIsGameStarted(isGameStarted);
@@ -70,10 +70,10 @@ public class Game {
                     startTurnCounter();
 
                     aiPlayerTransactions = getAIPlayerActions();
-                }else if (timeToStartTheGameInSec == 0) {
+                } else if (timeToStartTheGameInSec == 0) {
                     timeToStartTheGameTimer.cancel();
 
-                    System.out.println("not starting game because not enough players");
+                    Debugger.log("not starting game because not enough players");
                     timeToStartTheGameInSec = TIME_TO_READY_IN_SEC;
 
                     isGameReadyToStart = true;
@@ -90,7 +90,7 @@ public class Game {
         timeToStartTheGameTimer.scheduleAtFixedRate(timeToStartTheGameCounterTimerTask, 10, 1000);
     }
 
-    private static void startTurnCounter() {
+    private static void startTurnCounter() throws NullPointerException {
 
         timeToStartNextRoundTimer = new Timer("Time to start a new round");//create a new Timer;
 
@@ -100,7 +100,7 @@ public class Game {
             public void run() {
 
                 if (turnCounter == 10) {
-                    System.out.println("game end");
+                    Debugger.log("game end");
 
                     //stop timer and set turn counter to 0
                     timeToStartNextRoundTimer.cancel();
@@ -131,16 +131,17 @@ public class Game {
                 } else {
                     turnCounter++;
 
-                    if(aiPlayerTransactions[turnCounter-1] != null){
-                        PlayerTransactionsOfTurn aiPlayerTransaction = aiPlayerTransactions[turnCounter-1];
-                        if(aiPlayerTransaction.getSellOrBuy().equals("sell")){
-                            new Broker().sell(Main.nextTURN(),aiPlayerTransaction.getName(),aiPlayerTransaction.getStock(),aiPlayerTransaction.getQuantity(),aiPlayerTransaction.getStockPrice());
-                        }else if (aiPlayerTransaction.getSellOrBuy().equals("buy")){
-                            new Broker().buy(Main.nextTURN(),aiPlayerTransaction.getName(),aiPlayerTransaction.getStock(),aiPlayerTransaction.getQuantity(),aiPlayerTransaction.getStockPrice());
+                    if (aiPlayerTransactions[turnCounter - 1] != null) {
+                        PlayerTransactionsOfTurn aiPlayerTransaction = aiPlayerTransactions[turnCounter - 1];
+                        if (aiPlayerTransaction.getSellOrBuy().equals("sell")) {
+                            new Broker().sell(Main.nextTURN(), aiPlayerTransaction.getName(), aiPlayerTransaction.getStock(), aiPlayerTransaction.getQuantity(), aiPlayerTransaction.getStockPrice());
+                        } else if (aiPlayerTransaction.getSellOrBuy().equals("buy")) {
+                            new Broker().buy(Main.nextTURN(), aiPlayerTransaction.getName(), aiPlayerTransaction.getStock(), aiPlayerTransaction.getQuantity(), aiPlayerTransaction.getStockPrice());
                         }
                     }
 
-                    System.out.println("now begins the turn : " + turnCounter);
+                    Debugger.log("now begins the turn : " + turnCounter);
+
                 }
             }
         };
@@ -181,12 +182,12 @@ public class Game {
         return gameSimulator;
     }
 
-    private static PlayerTransactionsOfTurn[] getAIPlayerActions(){
+    private static PlayerTransactionsOfTurn[] getAIPlayerActions() {
         AIPlayer aiPlayer = new AIPlayer();
         return aiPlayer.getPlayerTransactionsOfTurnsArray();
     }
 
-    private static String[] getAnalyserRecommendations(){
+    public static String[] getAnalyserRecommendations() {
         Analyst analyst = new Analyst();
         return analyst.getRecommendations();
     }
@@ -206,6 +207,7 @@ public class Game {
     public static List<PlayerAndInitialBalance> getPlayerList() {
         return playerList;
     }
+
 
     public static boolean addPlayerTransactionToTurn(PlayerTransactionsOfTurn playerTransactionsOfTurn) {
         return Game.addToTurn(playerTransactionsOfTurn, turnCounter);

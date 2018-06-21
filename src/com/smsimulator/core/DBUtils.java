@@ -1,8 +1,6 @@
 package com.smsimulator.core;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DBUtils {
     private static Connection databaseConnection = null;
@@ -55,5 +53,23 @@ public class DBUtils {
         }
 
         return databaseConnection;
+    }
+
+    public static int getFinalGameTurn(){
+        try {
+            int turn = -1;
+            PreparedStatement preparedStatement;
+            ResultSet resultSet;
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT sf_getMaxTurn()");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                turn = resultSet.getInt(1);
+            }
+
+            return turn;
+        } catch (SQLException e) {
+            return -1;
+        }
     }
 }

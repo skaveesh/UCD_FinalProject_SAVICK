@@ -35,7 +35,7 @@ public class AIPlayer extends AnalyserMain {
         setPlayerTransactionsForTurn(4, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[4] );
         setPlayerTransactionsForTurn(5, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[5] );
         setPlayerTransactionsForTurn(6, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[6] );
-        setPlayerTransactionsForTurn(7, "sell", "HNB", 9, getCompanyStockArrayByStockName("HNB")[7] );
+        setPlayerTransactionsForTurn(7, "sell", "HNB", 2259, getCompanyStockArrayByStockName("HNB")[7] );
         setPlayerTransactionsForTurn(8, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[8] );
         setPlayerTransactionsForTurn(9, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[9] );
     }

@@ -19,9 +19,7 @@ public class GameReadyRestlet extends Restlet {
             String playerName = (String) request.getAttributes().get("name");
             int playerUid = new Player().getUidFromName(playerName);
 
-            if(playerUid != -1 && new Bank().checkExistenceOfAccount(playerName) && new Broker().checkExistenceOfAccount(playerName)) {
-
-                if(!Game.getIsGameStarted()) {
+            if(playerUid != -1 && new Bank().checkExistenceOfAccount(playerName) && new Broker().checkExistenceOfAccount(playerName) && !Game.getIsGameStarted()) {
 
                     if (!Game.getIsGameReadyToStart()) {
 
@@ -44,9 +42,6 @@ public class GameReadyRestlet extends Restlet {
                         Game.addToPlayerList(playerName);
                         response.setStatus(Status.SUCCESS_OK);
                     }
-
-                }else
-                    response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
 
             }else
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
