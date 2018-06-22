@@ -16,7 +16,7 @@ public class BankTest {
         //start DB service
         DBUtils dbtest = new DBUtils();
         //assert that the createAccount method executes successfully when given a valid username and a turn
-        assertTrue(testBank.createAccount(1,"David"));
+        assertTrue(testBank.createAccount(1,"jimcarrey"));
     }
 
     @Test

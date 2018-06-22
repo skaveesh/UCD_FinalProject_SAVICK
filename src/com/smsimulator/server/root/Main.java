@@ -77,7 +77,7 @@ public class Main extends InboundRoot {
         CompanyStock lbFinance = new CompanyStock("LB Finance PLC", "LBF");
 
         //Stocks of Technological Sector
-        CompanyStock johnKeells = new CompanyStock("John Keels", "JKH");
+        CompanyStock johnKeells = new CompanyStock("John Keells", "JKH");
         CompanyStock softlogic = new CompanyStock("Softlogic", "SHL");
         CompanyStock metropolitan = new CompanyStock("Metropolitan Group of Companies", "MGC");
 

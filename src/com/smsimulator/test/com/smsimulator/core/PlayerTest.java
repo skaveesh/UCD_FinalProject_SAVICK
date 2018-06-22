@@ -25,13 +25,13 @@ public class PlayerTest {
     }
 
     @Test
-//    public void getUidFromName() throws Exception {
-//        DBUtils dbtest = new DBUtils();
-//        //assert that the method returns the Uid of the player
-//        assertNotEquals(-1,testPlayer.getUidFromName("dilhara"));
-//    }
+    public void getUidFromName() throws Exception {
+        DBUtils dbtest = new DBUtils();
+        //assert that the method returns the Uid of the player
+        assertNotEquals(-1,testPlayer.getUidFromName("dilhara"));
+    }
 
-    public boolean getUidFromName() throws Exception {
+    /*public boolean getUidFromName() throws Exception {
         boolean status = true;
         if(status){
             assertNotEquals(-1,testPlayer.getUidFromName("dilhara"));
@@ -40,6 +40,6 @@ public class PlayerTest {
         else{
             return false;
         }
-    }
+    }*/
 
 }
