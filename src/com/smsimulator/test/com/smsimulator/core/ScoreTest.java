@@ -8,35 +8,25 @@ public class ScoreTest {
     boolean status = true;
 
     @Test
-    public boolean getName() throws Exception {
-        if(status){
-            assertEquals("" ,score.getName());
-            return true;
-        }
-        else{
-            return false;
+    public void getName() throws Exception {
+        if(status) {
+            assertEquals("", score.getName());
         }
     }
 
-    public boolean getStartBalance() throws Exception {
+    @Test
+    public void getStartBalance() throws Exception {
         double bal = 50;
         if(status){
             assertEquals("Account balance was not correct.", bal, score.getStartBalance(), 0);
-            return true;
-        }
-        else {
-            return false;
         }
     }
 
-    public boolean getEndBalance() throws Exception {
+    @Test
+    public void getEndBalance() throws Exception {
         double bal = 50;
         if(status){
             assertEquals("Account balance was not correct.", bal, score.getEndBalance(), 0);
-            return true;
-        }
-        else {
-            return false;
         }
     }
 
@@ -51,6 +41,7 @@ public class ScoreTest {
         }
     }*/
 
+    @Test
     public void getProfit() throws Exception {
         double bal = 50;
         assertEquals("Account balance was not correct.", bal, score.getProfit(), 0);
