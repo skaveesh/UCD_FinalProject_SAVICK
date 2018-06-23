@@ -109,6 +109,7 @@ public class MarketComponents {
             }
         }
         companyStock.setStockArray(stockPriceArray);
+        //System.out.println(companyStock);
         return companyStock;
     }
 
