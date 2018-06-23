@@ -105,7 +105,6 @@ public class MarketComponents {
             double changedPercentage = (currentStockValue - stockPriceArray[i]) / 100;
             if (i > 0 && ((changedPercentage <= -0.01) || (changedPercentage >= 0.01))) {
                 stockPriceArray[i] = currentStockValue;
-
             }
         }
         companyStock.setStockArray(stockPriceArray);
@@ -158,7 +157,6 @@ public class MarketComponents {
                 double changedPercentage = (currentStockValue - stockPriceArray[i]) / 100;
                 if (i > 0 && ((changedPercentage >= -0.01) && (changedPercentage <= 0.01))) {
                     stockPriceArray[i] = currentStockValue;
-
                 }
             }
             companyStock.setStockArray(stockPriceArray);
