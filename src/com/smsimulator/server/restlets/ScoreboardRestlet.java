@@ -23,28 +23,32 @@ public class ScoreboardRestlet extends Restlet {
     public void handle(Request request, Response response) {
         if (request.getMethod().equals(Method.POST)) {
 
-            int startTurn = (int) request.getAttributes().get("startturn");
+            try {
+                int startTurn =  Integer.parseInt((String) request.getAttributes().get("startturn"));
 
-            List<Score> scoreList = new Player().getPlayerScoreboard(startTurn);
+                List<Score> scoreList = new Player().getPlayerScoreboard(startTurn);
 
-            //creating gson response object
-            List<com.smsimulator.gsoncore.Score> scoreList1 = new ArrayList<>();
+                //creating gson response object
+                List<com.smsimulator.gsoncore.Score> scoreList1 = new ArrayList<>();
 
-            for(Score score: scoreList){
-                com.smsimulator.gsoncore.Score score1 = new com.smsimulator.gsoncore.Score();
-                score1.setName(score.getName());
-                score1.setStartBalance(score.getStartBalance());
-                score1.setEndBalance(score.getEndBalance());
-                score1.setProfit(score.getProfit());
-                scoreList1.add(score1);
+                for (Score score : scoreList) {
+                    com.smsimulator.gsoncore.Score score1 = new com.smsimulator.gsoncore.Score();
+                    score1.setName(score.getName());
+                    score1.setStartBalance(score.getStartBalance());
+                    score1.setEndBalance(score.getEndBalance());
+                    score1.setProfit(score.getProfit());
+                    scoreList1.add(score1);
+                }
+
+                PlayerScoreboard playerScoreboard = new PlayerScoreboard();
+                playerScoreboard.setScore(scoreList1);
+
+                response.setEntity(InboundRoot.gson.toJson(playerScoreboard), MediaType.APPLICATION_JSON);
+                response.setStatus(Status.SUCCESS_OK);
+
+            }catch (NumberFormatException e){
+                response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
             }
-
-            PlayerScoreboard playerScoreboard = new PlayerScoreboard();
-            playerScoreboard.setScore(scoreList1);
-
-            response.setEntity(InboundRoot.gson.toJson(playerScoreboard), MediaType.APPLICATION_JSON);
-            response.setStatus(Status.SUCCESS_OK);
-
         } else {
             response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
         }

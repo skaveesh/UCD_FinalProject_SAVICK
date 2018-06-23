@@ -17,6 +17,9 @@ public class GameSimulator {
     @SerializedName("gameStartTurn")
     @Expose
     private Integer gameStartTurn;
+    @SerializedName("gameLocalCurrentTurn")
+    @Expose
+    private Integer gameLocalCurrentTurn;
     @SerializedName("timeToStartTheGameInSec")
     @Expose
     private Integer timeToStartTheGameInSec;
@@ -57,10 +60,11 @@ public class GameSimulator {
     public GameSimulator() {
     }
 
-    public GameSimulator(Boolean isGameReadyToStart, Boolean isGameStarted, Integer gameStartTurn) {
+    public GameSimulator(Boolean isGameReadyToStart, Boolean isGameStarted, Integer gameStartTurn, Integer gameLocalCurrentTurn) {
         this.isGameReadyToStart = isGameReadyToStart;
         this.isGameStarted = isGameStarted;
         this.gameStartTurn = gameStartTurn;
+        this.gameLocalCurrentTurn = gameLocalCurrentTurn;
     }
 
     public Boolean getIsGameReadyToStart() {
@@ -85,6 +89,14 @@ public class GameSimulator {
 
     public void setGameStartTurn(Integer gameStartTurn) {
         this.gameStartTurn = gameStartTurn;
+    }
+
+    public Integer getGameLocalCurrentTurn() {
+        return gameLocalCurrentTurn;
+    }
+
+    public void setGameLocalCurrentTurn(Integer gameLocalCurrentTurn) {
+        this.gameLocalCurrentTurn = gameLocalCurrentTurn;
     }
 
     public Integer getTimeToStartTheGameInSec() {

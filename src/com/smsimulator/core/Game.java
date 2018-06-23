@@ -15,9 +15,9 @@ import java.util.TimerTask;
  */
 public class Game {
 
-    private static final int TIME_TO_READY_IN_SEC = 60;
-    private static final int TIME_FOR_EACH_TURN_IN_SEC = 30;
-    private static final int MINIMUM_PLAYERS_LIMIT = 2;
+    private static final int TIME_TO_READY_IN_SEC = 10;
+    private static final int TIME_FOR_EACH_TURN_IN_SEC = 10;
+    private static final int MINIMUM_PLAYERS_LIMIT = 3;
 
     static private int gameStartedTurn = -1;
 
@@ -37,7 +37,6 @@ public class Game {
     static private List<PlayerTransactionsOfTurn> turn9 = new ArrayList<>();
     static private List<PlayerTransactionsOfTurn> turn10 = new ArrayList<>();
 
-    static private GameSimulator gameSimulator = new GameSimulator(true, false, gameStartedTurn);
 
     private static int timeToStartTheGameInSec = TIME_TO_READY_IN_SEC; //initially every player has 60 seconds to join the game
 
@@ -47,6 +46,8 @@ public class Game {
     private static Timer timeToStartNextRoundTimer;
 
     private static PlayerTransactionsOfTurn[] aiPlayerTransactions;
+
+    static private GameSimulator gameSimulator = new GameSimulator(true, false, gameStartedTurn, turnCounter);
 
 
     private static void startReadyCounter() throws NullPointerException {
@@ -69,7 +70,7 @@ public class Game {
                     timeToStartTheGameTimer.cancel();
                     startTurnCounter();
 
-                    aiPlayerTransactions = getAIPlayerActions();
+                    //aiPlayerTransactions = getAIPlayerActions();
                 } else if (timeToStartTheGameInSec == 0) {
                     timeToStartTheGameTimer.cancel();
 
@@ -131,6 +132,10 @@ public class Game {
                 } else {
                     turnCounter++;
 
+                    gameSimulator.setGameLocalCurrentTurn(turnCounter);
+
+                    aiPlayerTransactions = getAIPlayerActions();
+
                     if (aiPlayerTransactions[turnCounter - 1] != null) {
                         PlayerTransactionsOfTurn aiPlayerTransaction = aiPlayerTransactions[turnCounter - 1];
                         if (aiPlayerTransaction.getSellOrBuy().equals("sell")) {
@@ -156,7 +161,7 @@ public class Game {
 
         gameStartedTurn = Main.nextTURN();
 
-        gameSimulator = new GameSimulator(isGameReadyToStart, isGameStarted, gameStartedTurn);
+        gameSimulator = new GameSimulator(isGameReadyToStart, isGameStarted, gameStartedTurn, turnCounter);
 
         startReadyCounter();
 
