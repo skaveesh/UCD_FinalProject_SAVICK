@@ -11,8 +11,20 @@ public class TransactionTest {
     }
 
     @Test
+    public void setStock() throws Exception {
+        String testStock = "";
+        assertEquals(testStock, transactiontest.getStock());
+    }
+
+    @Test
     public void getQuantity() throws Exception {
         assertEquals(1,transactiontest.getQuantity());
+    }
+
+    @Test
+    public void setQuantity() throws Exception {
+        int testQuantity = 1;
+        assertEquals(testQuantity, transactiontest.getQuantity());
     }
 
     @Test
@@ -21,11 +33,19 @@ public class TransactionTest {
     }
 
     @Test
+    public void setPrice() throws Exception {
+        double testPrice = 0;
+        assertEquals(testPrice, transactiontest.getPrice(),0.0f);
+    }
+
+    @Test
     public void getTurn() throws Exception {
         assertEquals(1, transactiontest.getTurn());
     }
 
     @Test
-    public void setStock() throws Exception {
+    public void setTurn() throws Exception {
+        int testTurn = 1;
+        assertEquals(testTurn, transactiontest.getTurn());
     }
 }
