@@ -14,7 +14,7 @@ public class MarketComponentsTest {
 
     private MarketComponents testMarketComponent = new MarketComponents();
     private List<Sector> testSectorList = Main.initializeStocks();
-
+    private CompanyStock testStock = new CompanyStock("company","sector");
 
     @Test
     public void importSectors() throws Exception {

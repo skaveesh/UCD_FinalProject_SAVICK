@@ -23,7 +23,7 @@ public class BankTest {
     public void checkExistenceOfAccount() throws Exception {
         DBUtils dbtest = new DBUtils();
         //assert that the checkExistenceOfAccount method returns true when given a valid username.
-        assertTrue(testBank.checkExistenceOfAccount("dilhara"));
+        assertTrue(testBank.checkExistenceOfAccount("chula"));
     }
 
     @Test
