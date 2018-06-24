@@ -23,11 +23,13 @@ public class AIPlayer extends AnalyserMain {
     //playerTransactionsOfTurnsArray[8] is equal to turn 9
     //playerTransactionsOfTurnsArray[9] is equal to turn 10
 
-    AIPlayer(){
+    public AIPlayer(){
         //write setting code inside constructor
-
-
-
+        //danata buy or sell karanna thiyena hodama com eka
+        //balanna oone amount is enough aI player
+        //sell karanawanam danata stocks thiyenawada kiyala balanna oone
+        //mn gava thiyena stocks and amount check karala karanna puluwan hodama trasn eka hoyanna
+        //divide the amount in 10 so that there is same amount for the ten transactions
         setPlayerTransactionsForTurn(0, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[0] );
         setPlayerTransactionsForTurn(1, "buy", "LOLC", 3, getCompanyStockArrayByStockName("LOLC")[1] );
         setPlayerTransactionsForTurn(2, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[2] );
@@ -60,6 +62,7 @@ public class AIPlayer extends AnalyserMain {
         for(StockQuantity stockQuantity:AIPlayerCurrentlyOwnStocks ){
             System.out.println("AI Player has > Stock : " + stockQuantity.getStock() + " quantity : " + stockQuantity.getQuantity());
         }
+
     }
 
     private void setPlayerTransactionsForTurn(int index, String sellOrBuy, String stock, int quantity, double currentStockPriceOfTheStock){

@@ -44,7 +44,8 @@ public class Main extends InboundRoot {
 
         //initialize stocks
         Broker.generateNewStock();
-
+        Analyst analyst = new Analyst();
+//        AIPlayer aIPlayer = new AIPlayer();
 
     }
 
@@ -130,9 +131,9 @@ public class Main extends InboundRoot {
 
         //AnalyserMain anly = new AnalyserMain();
         //anly.setRecomandedList();
-        Analyst analyst = new Analyst();
+//        Analyst analyst = new Analyst();
         //AIPlayer ai = new AIPlayer();
-        analyst.setRecommendations();
+//        analyst.setRecommendations();
         //analyst.getRecommendations();
        // ai.startToBuy();
 
