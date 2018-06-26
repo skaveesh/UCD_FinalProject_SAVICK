@@ -1,4 +1,4 @@
-# UCD_FinalProject_SAVICK
+# UCD Final Project - SAVICK
 Stock Market Simulation Game 
 
 Stock Market simulation Game v1.4
