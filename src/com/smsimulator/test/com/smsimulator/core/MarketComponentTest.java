@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 /**
  * Created by Dilhara on 6/23/2018.
  */
-public class MarketComponentsTest {
+public class MarketComponentTest {
 
-    private MarketComponents testMarketComponent = new MarketComponents();
+    private MarketComponent testMarketComponent = new MarketComponent();
     private double testArray1[] = new double[20];
     private double testArray2[] = new double[20];
 

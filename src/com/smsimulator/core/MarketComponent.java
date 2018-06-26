@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MarketComponents {
+public class MarketComponent {
 
     /**
      * import sectors to apply trends

@@ -5,7 +5,6 @@ import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +43,7 @@ public class Main extends InboundRoot {
 
         //initialize stocks
         Broker.generateNewStock();
-        Analyst analyst = new Analyst();
+//        Analyst analyst = new Analyst();
 //        AIPlayer aIPlayer = new AIPlayer();
 
     }
@@ -115,30 +114,9 @@ public class Main extends InboundRoot {
         stockMarket.addToMarket(manufacturingSector);
         stockMarket.addToMarket(pharmaceuticalSector);
 
-        //printing before making changes to the market
-        for(Sector sector: stockMarket.sectorList){
-            for(CompanyStock companyStock:sector.stockList){
-                for (int i = 0; i < 20; i++) {
-                    System.out.println(companyStock.getStockName() + " " + companyStock.getStockPrice(i));
-                }
-                System.out.println("__________________________________________");
-            }
-        }
-
-        MarketComponents marketComponents = new MarketComponents();
-        List<Sector> eventsAppliedSectorList = marketComponents.importSectors(stockMarket.sectorList);
-        //new AnalyserMain().importList(eventsAppliedSectorList);
-
-        //AnalyserMain anly = new AnalyserMain();
-        //anly.setRecomandedList();
-//        Analyst analyst = new Analyst();
-        //AIPlayer ai = new AIPlayer();
-//        analyst.setRecommendations();
-        //analyst.getRecommendations();
-       // ai.startToBuy();
+        MarketComponent marketComponent = new MarketComponent();
+        List<Sector> eventsAppliedSectorList = marketComponent.importSectors(stockMarket.sectorList);
 
         return eventsAppliedSectorList;
     }
-
-
 }

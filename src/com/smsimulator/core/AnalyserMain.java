@@ -1,25 +1,34 @@
 package com.smsimulator.core;
 
-import javax.xml.bind.SchemaOutputResolver;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import org.omg.CORBA.Object;
 
-/**
- * Created by asusgeforce on 16/06/2018.
- */
+import javax.xml.bind.SchemaOutputResolver;
+import java.util.*;
+
+
 public class AnalyserMain {
 
-    //use this array to get stock
-    List<Sector> sectorList;
-    List<String> stockNameList = new ArrayList<>();
-    List<PredictionHistoryArray> predictedStockList = new ArrayList<>();
+    private List<Sector> sectorList;
+    private List<String> stockNameList = new ArrayList<>();
+    private List<PredictionHistoryArray> predictedStockList = new ArrayList<>();
+    private String tempStockName = "";
+
+    protected static final String BUY_TAG = "buy";
+    protected static final String SELL_TAG = "sell";
+
     protected Prediction prediction[] = new Prediction[10];
 
     public AnalyserMain(){
+        this.analyseToBuyOrSell();
+    }
+
+
+    /**
+     * Analyse to buy or sell stocks from the stock market
+     */
+    private void analyseToBuyOrSell() {
         sectorList = new Broker().getSectorList();
-        //stock market eke danata thiyena hodama trans eka (buy or sell)
+
         Debugger.log("AnalyserMain");
         for(Sector sector: sectorList){
             for(CompanyStock companyStock: sector.stockList){
@@ -27,99 +36,141 @@ public class AnalyserMain {
             }
         }
 
-//        predictedStockList.clear();
-//        for (String stockName : stockNameList){
-//            predictedStockList.add(new PredictionHistoryArray(getCompanyStockHistoryArray(stockName,10),stockName));
-//        }
-//        turnPrediction(predictedStockList);
-
-
-        //predicted stock lists
-        int increasingStockNumber = 10;
-        for (int i = 0; i < 10; i++) {
+        for (int currentTurn = 0; currentTurn < 10; currentTurn++) {
             predictedStockList.clear();
             for (String stockName : stockNameList){
-                predictedStockList.add(new PredictionHistoryArray(getCompanyStockHistoryArray(stockName,increasingStockNumber),stockName));
+                predictedStockList.add(new PredictionHistoryArray(getCompanyStockHistoryArray(stockName),stockName));
             }
-            prediction[i] = turnPrediction(predictedStockList,i);
-            increasingStockNumber++;
+            prediction[currentTurn] = turnPrediction(predictedStockList,currentTurn);
         }
-        //for the seconnd turn
-//        predictedStockList.clear();
-//        for (String stockName : stockNameList){
-//            predictedStockList.add(new PredictionHistoryArray(getCompanyStockHistoryArray(stockName,11),stockName));
-//        }
-//        prediction[1] = turnPrediction(predictedStockList);
+
+        for (int testIndex = 0; testIndex <prediction.length ; testIndex++) {
+            Debugger.log(prediction[testIndex].getBuyOrSell()+" "+prediction[testIndex].getStockName());
+        }
     }
 
-    //predicted transaction(buy or sell)
-    private Prediction turnPrediction(List<PredictionHistoryArray> predictedStockList,int i ){
+    /**
+     * analyse for each turn
+     *
+     * @param predictedStockList stock list to be analysed
+     * @param currentTurn Each turn
+     * @return analysed prediction for each turn
+     */
+    private Prediction turnPrediction(List<PredictionHistoryArray> predictedStockList,int currentTurn ) {
         String buyOrSell = "";
         String stockName = "";
-        double maxChange = 0;
+        double maximumChange = 0;
 
-        for (PredictionHistoryArray predictedHistory: predictedStockList){
+        for (PredictionHistoryArray predictedHistory : predictedStockList) {
             double[] predictedHistoryDouble = predictedHistory.getHistory();
-            if(i == 0){
-                buyOrSell = "buy";
-                double maxValue = predictedHistoryDouble[0]; // 73.58
-                double minValue = predictedHistoryDouble[0]; // 73.58
-                for (int j = 1; j <predictedHistoryDouble.length ; j++) {
-                    System.out.println(predictedHistoryDouble[j]);
-                    if(predictedHistoryDouble[j]>maxValue){
-                        maxValue = predictedHistoryDouble[j];
-                    }
-                    if(predictedHistoryDouble[j]<minValue) {
-                        minValue = predictedHistoryDouble[j];
-                    }
+            Debugger.log(predictedHistory.getStockName());
+            for (int i = 0; i < predictedHistoryDouble.length ; i++) {
+                Debugger.log(predictedHistoryDouble[i]);
+            }
 
-                }
-
-                if((maxValue-minValue)>maxChange){
-                    maxChange = maxValue - minValue;
-                    stockName = predictedHistory.getStockName();
-                }
-                System.out.println("Change - "+(maxValue-minValue));
-                System.out.println("Max Value - "+maxValue+"------- Min Value - "+minValue);
-                System.out.println("maxChange - "+maxChange+"------- stockName - "+stockName);
+            switch (currentTurn){
+                case 0:
+                    buyOrSell = BUY_TAG;
+                    Debugger.log("Change - "+(predictedHistoryDouble[1] - predictedHistoryDouble[0]));
+                    if ((predictedHistoryDouble[1] - predictedHistoryDouble[0]) > maximumChange) {
+                        maximumChange = predictedHistoryDouble[1] - predictedHistoryDouble[0];
+                        stockName = predictedHistory.getStockName();
+                        tempStockName = stockName;
+                    }
+                    Debugger.log("Maximum Change - "+maximumChange);
+                    break;
+                case 1:
+                    buyOrSell = SELL_TAG;
+                    stockName = tempStockName;
+                    break;
+                case 2:
+                    buyOrSell = BUY_TAG;
+                    if ((predictedHistoryDouble[3] - predictedHistoryDouble[2]) > maximumChange) {
+                        maximumChange = predictedHistoryDouble[3] - predictedHistoryDouble[2];
+                        stockName = predictedHistory.getStockName();
+                        tempStockName = stockName;
+                    }
+                    break;
+                case 3:
+                    buyOrSell = SELL_TAG;
+                    stockName = tempStockName;
+                    break;
+                case 4:
+                    buyOrSell = BUY_TAG;
+                    if ((predictedHistoryDouble[5] - predictedHistoryDouble[4]) > maximumChange) {
+                        maximumChange = predictedHistoryDouble[5] - predictedHistoryDouble[4];
+                        stockName = predictedHistory.getStockName();
+                        tempStockName = stockName;
+                    }
+                    break;
+                case 5:
+                    buyOrSell = SELL_TAG;
+                    stockName = tempStockName;
+                    break;
+                case 6:
+                    buyOrSell = BUY_TAG;
+                    if ((predictedHistoryDouble[7] - predictedHistoryDouble[6]) > maximumChange) {
+                        maximumChange = predictedHistoryDouble[7] - predictedHistoryDouble[6];
+                        stockName = predictedHistory.getStockName();
+                        tempStockName = stockName;
+                    }
+                    break;
+                case 7:
+                    buyOrSell = SELL_TAG;
+                    stockName = tempStockName;
+                    break;
+                case 8:
+                    buyOrSell = BUY_TAG;
+                    if ((predictedHistoryDouble[9] - predictedHistoryDouble[8]) > maximumChange) {
+                        maximumChange = predictedHistoryDouble[9] - predictedHistoryDouble[8];
+                        stockName = predictedHistory.getStockName();
+                        tempStockName = stockName;
+                    }
+                    break;
+                case 9:
+                    buyOrSell = SELL_TAG;
+                    stockName = tempStockName;
+                    break;
+                default:
+                    Debugger.log("Something went wrong.....  :(");
             }
         }
-
         return new Prediction(buyOrSell,stockName);
     }
 
-    protected double[] getCompanyStockHistoryArray(String stockName, int finalStockNumber){
-        double[] stockArray = new double[finalStockNumber];
+    /**
+     * get the stock history of companies
+     *
+     * @param stockName Name of the company in which the stocks contain
+     * @return returns stock history Array
+     */
+    protected double[] getCompanyStockHistoryArray(String stockName){
+        double[] stockArray = new double[10];
         for(Sector sector : new Broker().getSectorList()){
             for (CompanyStock companyStock : sector.stockList){
                 if(companyStock.getStockName().equals(stockName)){
-                    stockArray = Arrays.copyOfRange(companyStock.getStockPriceArray(), 0,finalStockNumber);
+                    stockArray = Arrays.copyOfRange(companyStock.getStockPriceArray(), 9,19);
                 }
             }
         }
         return stockArray;
     }
 
-
+    /**
+     * get the stock array for a particular company
+     *
+     * @param stockName Name of the company to return the stock values
+     * @return returns stocks of the company
+     */
     protected double[] getCompanyStockArrayByStockName(String stockName){
         double[] stockArray = new double[10];
         for(Sector sector : new Broker().getSectorList()){
             for (CompanyStock companyStock : sector.stockList){
                 if(companyStock.getStockName().equals(stockName)){
-                    stockArray = Arrays.copyOfRange(companyStock.getStockPriceArray(), 10,20);
+                    stockArray = Arrays.copyOfRange(companyStock.getStockPriceArray(), 9,19);
                 }
             }
         }
         return stockArray;
-    }
-
-    protected List<String> getAllCompanyStockNames(){
-        List<String> companyStockNames = new ArrayList<>();
-        for(Sector sector : new Broker().getSectorList()){
-            for (CompanyStock companyStock : sector.stockList){
-                companyStockNames.add(companyStock.getStockName());
-            }
-        }
-        return companyStockNames;
     }
 }
