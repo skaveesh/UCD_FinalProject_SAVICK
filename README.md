@@ -21,3 +21,6 @@ To run the project goto "src" folder and right click on Main which is located in
         compiler output. This path usually is "<yourproject location>/out"
         Then goto Build>Build Module 'UCD_FinalProject_SAVICK' and try again running the Application
 ```
+
+## Database SQL file
+  https://drive.google.com/open?id=1pbgwv9gy01SA7tNLxQ3hHvAnUbVrPDFj
