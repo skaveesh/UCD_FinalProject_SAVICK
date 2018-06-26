@@ -29,7 +29,7 @@ public class TransactionTest {
 
     @Test
     public void getPrice() throws Exception {
-        assertEquals("",0.f,transactiontest.getPrice(), 0);
+        assertEquals("",0.f,transactiontest.getPrice(), 0.0f);
     }
 
     @Test
