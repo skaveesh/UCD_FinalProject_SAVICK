@@ -26,5 +26,5 @@ To run the project goto "src" folder and right click on Main which is located in
   https://drive.google.com/open?id=1pbgwv9gy01SA7tNLxQ3hHvAnUbVrPDFj
   
 ## Deployed Version Links
-  ### Front-end link : http://simulator-frontend.s3-website-us-east-1.amazonaws.com/simulator 
+  ### Front-end link : http://simulator-frontend.s3-website-us-east-1.amazonaws.com/
   ### Back-end link  : http://stockmarketsimulator-env.3ipy32ivep.us-east-1.elasticbeanstalk.com/
