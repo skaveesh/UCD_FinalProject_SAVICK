@@ -5,7 +5,6 @@ import org.restlet.Component;
 import org.restlet.data.Protocol;
 import org.restlet.service.CorsService;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

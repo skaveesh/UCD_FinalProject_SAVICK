@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jjwt-0.9.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/com/smsimulator/libs/jjwt-0.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/jjwt-0.9.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -41,7 +41,7 @@ public class StockPriceListOfCompanyRestlet extends Restlet {
             }
 
         } else {
-            response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+            response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
         }
     }
 }

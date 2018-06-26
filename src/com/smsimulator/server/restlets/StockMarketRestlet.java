@@ -53,7 +53,7 @@ public class StockMarketRestlet extends Restlet {
             response.setStatus(Status.SUCCESS_OK);
 
         } else {
-            response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+            response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
         }
     }
 }

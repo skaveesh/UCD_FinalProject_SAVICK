@@ -85,11 +85,16 @@ public class Player {
         }
     }
 
+    /**
+     * get player scoreboard for the current game turn
+     * @param startTurn game turn of the finally played game
+     * @return scoreboard list
+     */
     public List<Score> getPlayerScoreboard(int startTurn){
         List<Score> scoreList = new ArrayList<>();
 
         try {
-            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT p.username, sc.start_balance, sc.end_balance, sc.end_balance - sc.start_balance AS profit FROM scoreboard AS sc INNER JOIN player AS p ON sc.uid=p.uid WHERE sc.start_turn=?");
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT p.username, sc.start_balance, sc.end_balance, sc.end_balance - sc.start_balance AS profit FROM scoreboard AS sc INNER JOIN player AS p ON sc.uid=p.uid WHERE sc.start_turn=? ORDER BY profit DESC");
             preparedStatement.setInt(1, startTurn);
             resultSet = preparedStatement.executeQuery();
 
@@ -103,4 +108,27 @@ public class Player {
             return null;
         }
     }
+
+    /**
+     * get rankings of the all players all the time, limited to first 10 players
+     * @return ranking list
+     */
+    public List<Ranking> getPlayerRankings(){
+        List<Ranking> rankingList = new ArrayList<>();
+
+        try {
+            preparedStatement = DBUtils.getDatabaseConnection().prepareStatement("SELECT p.username, (sum(sc.end_balance) - sum(sc.start_balance)) AS profit FROM scoreboard AS sc INNER JOIN player AS p ON sc.uid=p.uid GROUP BY sc.uid HAVING profit>0 ORDER BY profit DESC limit 10;");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Ranking ranking= new Ranking(resultSet.getString("username"),resultSet.getDouble("profit"));
+                rankingList.add(ranking);
+            }
+
+            return rankingList;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
 }

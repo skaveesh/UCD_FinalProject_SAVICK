@@ -21,6 +21,7 @@ public class InboundRoot extends Application {
         router.attach("/player/createaccount", new PlayerAccountCreateRestlet());
         router.attach("/player/login", new LoginPlayerRestlet());
         router.attach("/player/scoreboard/{startturn}", new ScoreboardRestlet());
+        router.attach("/player/ranking", new RankingsRestlet());
 
         router.attach("/bank/account/createaccount", new BankAccountCreateRestlet());
         router.attach("/bank/account/check/{name}", new BankAccountExistenceRestlet());
