@@ -50,7 +50,7 @@ public class StockPriceOfCompanyRestlet extends Restlet {
                 response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
             }
         } else {
-            response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+            response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
         }
     }
 }

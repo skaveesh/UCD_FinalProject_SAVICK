@@ -18,7 +18,7 @@ public class WelcomeRestlet extends Restlet {
             response.setEntity("Welcome to the Stock Market Simulator", MediaType.TEXT_PLAIN);
             response.setStatus(Status.SUCCESS_OK);
         } else {
-            response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+            response.setStatus(Status.CLIENT_ERROR_UNAUTHORIZED);
         }
     }
 }
