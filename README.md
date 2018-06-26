@@ -31,6 +31,3 @@ To run the project goto "src" folder and right click on Main which is located in
   ### Used Function and Procedures
   https://drive.google.com/file/d/1ir3eP-8q-WAl1U8ofr48VXjObsVRCE3W/view?usp=sharing
   
-## Deployed Version Links
-  ### Front-end link : http://simulator-frontend.s3-website-us-east-1.amazonaws.com/
-  ### Back-end link  : http://stockmarketsimulator-env.3ipy32ivep.us-east-1.elasticbeanstalk.com/
