@@ -1,6 +1,9 @@
 # UCD_FinalProject_SAVICK
 Stock Market Simulation Game 
 
+Stock Market simulation Game v1.4
+This project was developed by group of students at UCD for the final year project. This project implements a Stock Market simulator. A player has to sign up beforehand or login using the credentials to play the game. Minimum of 3 players (Deployed version, minimum players are 2 - (Human Player and AI Player) for testing purpose) including AI player (which is basically a computer player), required to start a game. The game has 10 rounds and each round lasts 30 seconds. Game provide 60 seconds of time as Ready Period to allow other players to join the game. At the start of each round the stock values gets changed according to the trends and events occurred. Each player in a game gets an opening balance of 1000 and connected players can buy and sell stocks in each round. At the end of the final round which is round 10 to be precise the player who has invested by far the best in stocks and gains the most profits will win the game.
+
 ## Running the Project
 This project is created using Intellij IDEA
 For contributers
