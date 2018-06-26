@@ -15,8 +15,8 @@ import java.util.TimerTask;
  */
 public class Game {
 
-    private static final int TIME_TO_READY_IN_SEC = 10;
-    private static final int TIME_FOR_EACH_TURN_IN_SEC = 10;
+    private static final int TIME_TO_READY_IN_SEC = 60;
+    private static final int TIME_FOR_EACH_TURN_IN_SEC = 30;
     private static final int MINIMUM_PLAYERS_LIMIT = 3;
 
     static private int gameStartedTurn = -1;
@@ -49,6 +49,7 @@ public class Game {
 
     static private GameSimulator gameSimulator = new GameSimulator(true, false, gameStartedTurn, turnCounter);
 
+    static AIPlayer aiPlayer = new AIPlayer();
 
     private static void startReadyCounter() throws NullPointerException {
         timeToStartTheGameTimer = new Timer("Time to join the game in seconds");//create a new Timer
@@ -157,6 +158,8 @@ public class Game {
 
     public static void play() {
 
+        aiPlayer = new AIPlayer();
+
         clearPlayerListAndTurnInformation();
 
         gameStartedTurn = Main.nextTURN();
@@ -187,13 +190,31 @@ public class Game {
         return gameSimulator;
     }
 
+
+//    aiPlayer = null;
+//
+//    aiPlayer = new AIPlayer();
     private static PlayerTransactionsOfTurn[] getAIPlayerActions() {
-        AIPlayer aiPlayer = new AIPlayer();
-        return aiPlayer.getPlayerTransactionsOfTurnsArray();
+
+
+        System.out.println("++++++++++++++++++++++++++++++++++++++");
+        for (PlayerTransactionsOfTurn p : aiPlayer.getPlayerTransactionsOfTurnsArray()) {
+            Debugger.log(p.getStock() + " " + p.getQuantity() + " " + p.getSellOrBuy());
+        }
+
+        PlayerTransactionsOfTurn[] playerTransactionsOfTurns = new PlayerTransactionsOfTurn[10];
+
+        for (int i = 0; i < aiPlayer.getPlayerTransactionsOfTurnsArray().length; i++) {
+            playerTransactionsOfTurns[i] = aiPlayer.getPlayerTransactionsOfTurnsArray()[i];
+        }
+
+        return playerTransactionsOfTurns;
     }
 
-    public static String[] getAnalyserRecommendations() {
-        Analyst analyst = new Analyst();
+    private Analyst analyst = new Analyst();
+
+    public String[] getAnalyserRecommendations() {
+
         return analyst.getRecommendations();
     }
 

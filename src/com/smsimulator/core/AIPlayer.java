@@ -2,7 +2,6 @@ package com.smsimulator.core;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,18 +11,20 @@ public class AIPlayer extends AnalyserMain {
 
     private static final String PLAYER_NAME = "AIPlayer";
     private PlayerTransactionsOfTurn[] playerTransactionsOfTurnsArray = new PlayerTransactionsOfTurn[10];
-    private double currentBalance = 0;
 
-    public AIPlayer(){
-        aIGameLogic();
+    public AIPlayer(){aIGameLogic();
     }
 
     /**
      * The game strategy of the AIPlayer
      */
-    private void aIGameLogic() {
+    public void  aIGameLogic(){
+        double currentBalance = 0;
+        List<StockWithQuantity> stockWithQuantities = new ArrayList<>();
+        stockWithQuantities.clear();
+
         currentBalance = this.getAIPlayerCurrentBalance();
-        List<StockWithQuantity> stockWithQuantities= this.getAIPlayerCurrentlyOwnStocks();
+        stockWithQuantities = this.getAIPlayerCurrentlyOwnStocks();
 
         Debugger.log(" Current Balance in the bank - "+currentBalance);
 
@@ -51,7 +52,7 @@ public class AIPlayer extends AnalyserMain {
 
                 for (int i = 0; i < stockWithQuantities.size() ; i++) {
                     if(stockWithQuantities.get(i).getStockName().equals(stockCompany)) {
-                        stockWithQuantities.get(i).setQuantity(stockWithQuantities.get(i).getQuantity()+quantity);
+                        stockWithQuantities.get(i).setQuantity(quantity);
                     }else if(i==stockWithQuantities.size()-1){
                         stockWithQuantities.add(new StockWithQuantity(stockCompany,quantity));
                     }
@@ -71,6 +72,7 @@ public class AIPlayer extends AnalyserMain {
                         Debugger.log("Stock is not available");
                     }
                 }
+                quantity = noOfStocks;
                 Debugger.log("quantity = "+noOfStocks);
                 totalStockPrice = noOfStocks*stockPrice;
                 Debugger.log("totalStockPrice = "+totalStockPrice);
@@ -82,8 +84,11 @@ public class AIPlayer extends AnalyserMain {
 
             Debugger.log("Balance after turn "+(currentTurn+1)+" is "+currentBalance);
             setPlayerTransactionsForTurn(currentTurn, transaction, stockCompany, quantity, getCompanyStockArrayByStockName(stockCompany)[currentTurn] );
+
             currentTurn++;
         }
+
+
         Debugger.log("Final Balance = "+currentBalance);
     }
 

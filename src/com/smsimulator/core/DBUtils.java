@@ -16,11 +16,11 @@ public class DBUtils {
 
     public DBUtils() throws Exception {
         //uncomment below line to connect to hosted database
-        //databaseConnection = createMySqlConnection();
+        databaseConnection = createMySqlConnection();
 
 
         // uncomment below line to connect to local database
-        databaseConnection = createMySqlLocalConnection();
+//        databaseConnection = createMySqlLocalConnection();
     }
 
     public static Connection getDatabaseConnection() {

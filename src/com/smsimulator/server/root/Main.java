@@ -39,12 +39,10 @@ public class Main extends InboundRoot {
         component.start();
 
         //initialize game turn from the turn where the application terminated finally
-       // TURN = DBUtils.getFinalGameTurn();
+        TURN = DBUtils.getFinalGameTurn();
 
         //initialize stocks
         Broker.generateNewStock();
-//        Analyst analyst = new Analyst();
-//        AIPlayer aIPlayer = new AIPlayer();
 
     }
 
@@ -86,7 +84,7 @@ public class Main extends InboundRoot {
         CompanyStock sierra = new CompanyStock("Sierra", "SIRA");
         CompanyStock unilever = new CompanyStock("Unilever Sri Lanka", "UNI");
 
-        //Stocks of Pharmacutical Sector
+        //Stocks of Pharmaceutical Sector
         CompanyStock gsk = new CompanyStock("GSK Sri Lanka", "GSK");
         CompanyStock sunPharma = new CompanyStock("Sun Pharmaceuticals", "SUN");
         CompanyStock tab = new CompanyStock("Tabrane Pharmacueticals", "TAB");
@@ -115,8 +113,7 @@ public class Main extends InboundRoot {
         stockMarket.addToMarket(pharmaceuticalSector);
 
         MarketComponent marketComponent = new MarketComponent();
-        List<Sector> eventsAppliedSectorList = marketComponent.importSectors(stockMarket.sectorList);
 
-        return eventsAppliedSectorList;
+        return marketComponent.importSectors(stockMarket.sectorList);
     }
 }

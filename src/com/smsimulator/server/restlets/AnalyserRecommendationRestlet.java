@@ -24,7 +24,7 @@ public class AnalyserRecommendationRestlet extends JWTSecurity {
             AnalyserRecommendation analyserRecommendation = new AnalyserRecommendation();
 
             for (int i = 0; i < 10; i++) {
-                analyserRecommendation.addToRecommendations(Game.getAnalyserRecommendations()[i]);
+                analyserRecommendation.addToRecommendations(new Game().getAnalyserRecommendations()[i]);
             }
 
             response.setEntity(InboundRoot.gson.toJson(analyserRecommendation), MediaType.APPLICATION_JSON);

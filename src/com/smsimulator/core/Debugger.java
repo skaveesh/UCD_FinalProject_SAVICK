@@ -6,7 +6,7 @@ package com.smsimulator.core;
  */
 public class Debugger {
 
-    private static final boolean isLoggerEnabled = true;
+    private static final boolean isLoggerEnabled = false;
 
     public static void log(Object o) {
         if (isLoggerEnabled)

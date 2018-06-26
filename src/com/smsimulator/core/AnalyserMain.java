@@ -1,8 +1,5 @@
 package com.smsimulator.core;
 
-import org.omg.CORBA.Object;
-
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 
 

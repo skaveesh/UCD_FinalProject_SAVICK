@@ -4,6 +4,7 @@ import com.smsimulator.core.*;
 import com.smsimulator.server.security.JWTSecurity;
 import org.restlet.Request;
 import org.restlet.Response;
+import org.restlet.Restlet;
 import org.restlet.data.Method;
 import org.restlet.data.Status;
 
