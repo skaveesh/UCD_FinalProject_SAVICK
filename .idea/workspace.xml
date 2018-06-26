@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5435309f-eece-42bc-bd41-711b758ca6cc" name="Default" comment="modified test cases">
+    <list default="true" id="5435309f-eece-42bc-bd41-711b758ca6cc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -59,7 +60,6 @@
         <option value="$PROJECT_DIR$/src/com/smsimulator/core/MarketComponents.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/core/Sector.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/core/AnalyserMain.java" />
-        <option value="$PROJECT_DIR$/src/com/smsimulator/core/AIPlayer.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/core/Analyst.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/core/Debugger.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/DebuggerTest.java" />
@@ -69,6 +69,12 @@
         <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/RankingTest.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionHistoryArrayTest.java" />
         <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionTest.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/core/AIPlayer.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AnalystTest.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/GameTest.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/GameSimulatorTest.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AnalyserMainTest.java" />
+        <option value="$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AIPlayerTest.java" />
       </list>
     </option>
   </component>
@@ -257,6 +263,15 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.smsimulator.core" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -270,8 +285,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PredictionTest">
-    <configuration default="false" name="StockQuantityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AIPlayerTest">
+    <configuration default="false" name="BankTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.smsimulator.core.*" />
@@ -282,7 +297,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.smsimulator.core" />
-      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.StockQuantityTest" />
+      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.BankTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -297,7 +312,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="RankingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="BankTransactionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.smsimulator.core.*" />
@@ -308,7 +323,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.smsimulator.core" />
-      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.RankingTest" />
+      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.BankTransactionTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -323,7 +338,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PredictionHistoryArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="EventComponentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.smsimulator.core.*" />
@@ -334,7 +349,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.smsimulator.core" />
-      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.PredictionHistoryArrayTest" />
+      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.EventComponentTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -349,7 +364,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="com.smsimulator.core in UCD_FinalProject_SAVICK" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="AnalyserMainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.smsimulator.core.*" />
@@ -360,9 +375,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.smsimulator.core" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.AnalyserMainTest" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -375,7 +390,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="PredictionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="AIPlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.smsimulator.core.*" />
@@ -386,7 +401,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.smsimulator.core" />
-      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.PredictionTest" />
+      <option name="MAIN_CLASS_NAME" value="com.smsimulator.core.AIPlayerTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -789,19 +804,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.StockQuantityTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.RankingTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.PredictionHistoryArrayTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.com.smsimulator.core in UCD_FinalProject_SAVICK" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PredictionTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.BankTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.BankTransactionTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.EventComponentTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.AnalyserMainTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.AIPlayerTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.PredictionTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.com.smsimulator.core in UCD_FinalProject_SAVICK" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.PredictionHistoryArrayTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.RankingTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.StockQuantityTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.AIPlayerTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.AnalyserMainTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.BankTransactionTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.BankTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.EventComponentTest" />
       </list>
     </recent_temporary>
   </component>
@@ -875,39 +890,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PlayerTransactionsTurnTest - 2018.06.26 at 14h 09m 02s.xml">
-      <configuration name="PlayerTransactionsTurnTest" configurationId="JUnit" />
+    <history-entry file="AIPlayerTest - 2018.06.26 at 21h 23m 50s.xml">
+      <configuration name="AIPlayerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PlayerTransactionsTurnTest - 2018.06.26 at 14h 09m 24s.xml">
-      <configuration name="PlayerTransactionsTurnTest" configurationId="JUnit" />
+    <history-entry file="AIPlayerTest - 2018.06.26 at 22h 31m 41s.xml">
+      <configuration name="AIPlayerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PredictionHistoryArrayTest - 2018.06.26 at 16h 23m 36s.xml">
-      <configuration name="PredictionHistoryArrayTest" configurationId="JUnit" />
+    <history-entry file="AIPlayerTest - 2018.06.26 at 22h 32m 01s.xml">
+      <configuration name="AIPlayerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PredictionTest - 2018.06.26 at 16h 34m 06s.xml">
-      <configuration name="PredictionTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 17m 00s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PredictionTest - 2018.06.26 at 16h 34m 52s.xml">
-      <configuration name="PredictionTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 17m 16s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RankingTest - 2018.06.26 at 15h 38m 17s.xml">
-      <configuration name="RankingTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 17m 56s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RankingTest - 2018.06.26 at 15h 39m 01s.xml">
-      <configuration name="RankingTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 18m 27s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="StockQuantityTest - 2018.06.26 at 14h 09m 46s.xml">
-      <configuration name="StockQuantityTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 18m 50s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TransactionTest - 2018.06.26 at 14h 02m 48s.xml">
-      <configuration name="TransactionTest" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 19m 02s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="com_smsimulator_core_in_UCD_FinalProject_SAVICK - 2018.06.26 at 16h 24m 25s.xml">
-      <configuration name="com.smsimulator.core in UCD_FinalProject_SAVICK" configurationId="JUnit" />
+    <history-entry file="AnalyserMainTest - 2018.06.26 at 21h 19m 36s.xml">
+      <configuration name="AnalyserMainTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93094000" />
+    <option name="totallyTimeSpent" value="108184000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -927,7 +942,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2803437" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2803437" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -997,74 +1012,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/CompanyShares.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/asda.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/server/restlets/BankAccountCreateRestlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/server/restlets/BankWithdrawRestlet.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/server/root/InboundRoot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="32" column="24" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/AIPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Analyst.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="48" lean-forward="false" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/MarketComponentsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Bank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-767">
-          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <marker date="1529328578702" expanded="true" signature="796:854" ph="INSERT INTO bank_account... " />
-            <marker date="1529328578702" expanded="true" signature="1656:1702" ph="SELECT * FRO... bank_account" />
-            <marker date="1529328578702" expanded="true" signature="4429:4528" ph="SELECT ba.ba... bank_account" />
-            <marker date="1529328578702" expanded="true" signature="5326:5461" ph="SELECT btd.s... bank_transaction_deposit" />
-            <marker date="1529328578702" expanded="true" signature="5918:6056" ph="SELECT btw.r... bank_transaction_withdraw" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/DBUtilsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/ScoreTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -1078,21 +1025,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="56" lean-forward="true" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/SectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/AnalyserMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1112,52 +1044,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BrokerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BankTransactionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BankTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Portfolio.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PlayerTransactionsTurnTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding>
-            <marker date="1529817829437" expanded="true" signature="10639:10734" ph="INSERT INTO scoreboard... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1177,16 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/StockQuantityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/TransactionTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -1203,25 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/BankTransaction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Broker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="25" />
-          <folding>
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/DBUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1231,14 +1093,6 @@
             <element signature="e#1007#1008#0" expanded="true" />
             <marker date="1529588847428" expanded="true" signature="2438:2460" ph="SELECT sf_ge... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/EventComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1254,10 +1108,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="12" column="63" lean-forward="false" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1529817829446" expanded="true" signature="6687:6815" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,45 +1158,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/StockQuantity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/CompanyStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/CompanyStockTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/RankingTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1357,16 +1174,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Prediction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -1375,13 +1182,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionHistoryArrayTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Profile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="168">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BrokerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1281">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1393,10 +1206,234 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Profile.java">
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/RankingTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/SectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/StockQuantityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionHistoryArrayTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/EventComponentTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PlayerTransactionsTurnTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BankTransactionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/PredictionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/StockQuantity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/StockWithQuantity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/GameSimulatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/GameSimulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-651">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/GameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462">
+          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+          <folding>
+            <marker date="1529817829437" expanded="true" signature="10639:10734" ph="INSERT INTO scoreboard... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/EventComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Bank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-861">
+          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <marker date="1529328578702" expanded="true" signature="796:854" ph="INSERT INTO bank_account... " />
+            <marker date="1529328578702" expanded="true" signature="1656:1702" ph="SELECT * FRO... bank_account" />
+            <marker date="1529328578702" expanded="true" signature="4429:4528" ph="SELECT ba.ba... bank_account" />
+            <marker date="1529328578702" expanded="true" signature="5326:5461" ph="SELECT btd.s... bank_transaction_deposit" />
+            <marker date="1529328578702" expanded="true" signature="5918:6056" ph="SELECT btw.r... bank_transaction_withdraw" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/BankTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/BankTransaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Broker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="25" />
+          <folding>
+            <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/Analyst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="29" column="41" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/AnalyserMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2856">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#606#607#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/CompanyStockTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/CompanyStock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AIPlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/core/AIPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="137" column="26" lean-forward="true" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AnalyserMainTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="12" column="40" lean-forward="true" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/smsimulator/test/com/smsimulator/core/AnalystTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="11" column="44" lean-forward="false" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
           <folding />
         </state>
       </provider>
