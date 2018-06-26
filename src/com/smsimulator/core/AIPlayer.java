@@ -12,59 +12,114 @@ public class AIPlayer extends AnalyserMain {
 
     private static final String PLAYER_NAME = "AIPlayer";
     private PlayerTransactionsOfTurn[] playerTransactionsOfTurnsArray = new PlayerTransactionsOfTurn[10];
-    //playerTransactionsOfTurnsArray[0] is equal to turn 1
-    //playerTransactionsOfTurnsArray[1] is equal to turn 2
-    //playerTransactionsOfTurnsArray[2] is equal to turn 3
-    //playerTransactionsOfTurnsArray[3] is equal to turn 4
-    //playerTransactionsOfTurnsArray[4] is equal to turn 5
-    //playerTransactionsOfTurnsArray[5] is equal to turn 6
-    //playerTransactionsOfTurnsArray[6] is equal to turn 7
-    //playerTransactionsOfTurnsArray[7] is equal to turn 8
-    //playerTransactionsOfTurnsArray[8] is equal to turn 9
-    //playerTransactionsOfTurnsArray[9] is equal to turn 10
+    private double currentBalance = 0;
 
     public AIPlayer(){
-        //write setting code inside constructor
-        //danata buy or sell karanna thiyena hodama com eka
-        //balanna oone amount is enough aI player
-        //sell karanawanam danata stocks thiyenawada kiyala balanna oone
-        //mn gava thiyena stocks and amount check karala karanna puluwan hodama trasn eka hoyanna
-        //divide the amount in 10 so that there is same amount for the ten transactions
-        setPlayerTransactionsForTurn(0, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[0] );
-        setPlayerTransactionsForTurn(1, "buy", "LOLC", 3, getCompanyStockArrayByStockName("LOLC")[1] );
-        setPlayerTransactionsForTurn(2, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[2] );
-        setPlayerTransactionsForTurn(3, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[3] );
-        setPlayerTransactionsForTurn(4, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[4] );
-        setPlayerTransactionsForTurn(5, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[5] );
-        setPlayerTransactionsForTurn(6, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[6] );
-        setPlayerTransactionsForTurn(7, "sell", "HNB", 2259, getCompanyStockArrayByStockName("HNB")[7] );
-        setPlayerTransactionsForTurn(8, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[8] );
-        setPlayerTransactionsForTurn(9, "buy", "HNB", 3, getCompanyStockArrayByStockName("HNB")[9] );
+        aIGameLogic();
+    }
+
+    /**
+     * The game strategy of the AIPlayer
+     */
+    private void aIGameLogic() {
+        currentBalance = this.getAIPlayerCurrentBalance();
+        List<StockWithQuantity> stockWithQuantities= this.getAIPlayerCurrentlyOwnStocks();
+
+        Debugger.log(" Current Balance in the bank - "+currentBalance);
+
+        String transaction = "";
+        String stockCompany = "";
+        double stockPrice = 0;
+
+        int currentTurn = 0;
+        for(Prediction predictedStocks: prediction){
+            transaction = predictedStocks.getBuyOrSell();
+            stockCompany = predictedStocks.getStockName();
+            stockPrice = getCompanyStockArrayByStockName(stockCompany)[currentTurn];
+            int quantity = 0;
+            double totalStockPrice = 0;
+
+            Debugger.log(transaction+ " "+stockCompany);
+            Debugger.log("Stock Price = "+getCompanyStockArrayByStockName(stockCompany)[currentTurn]);
+
+            if(transaction.equals(BUY_TAG)){
+                Debugger.log("---- Current Balance in the bank - "+currentBalance+" ------");
+
+                quantity = (int) (currentBalance/stockPrice);
+
+                Debugger.log("quantity = "+quantity);
+
+                for (int i = 0; i < stockWithQuantities.size() ; i++) {
+                    if(stockWithQuantities.get(i).getStockName().equals(stockCompany)) {
+                        stockWithQuantities.get(i).setQuantity(stockWithQuantities.get(i).getQuantity()+quantity);
+                    }else if(i==stockWithQuantities.size()-1){
+                        stockWithQuantities.add(new StockWithQuantity(stockCompany,quantity));
+                    }
+                }
+                totalStockPrice = stockPrice*quantity;
+                Debugger.log("totalStockPrice = "+totalStockPrice);
+                currentBalance = currentBalance - totalStockPrice;
+                Debugger.log("currentBalance = "+currentBalance);
+
+            }else if(transaction.equals(SELL_TAG)){
+
+                int noOfStocks = 0;
+                for (int i = 0; i < stockWithQuantities.size() ; i++) {
+                    if(stockWithQuantities.get(i).getStockName().equals(stockCompany)) {
+                        noOfStocks = stockWithQuantities.get(i).getQuantity();
+                    }else if(i==stockWithQuantities.size()-1){
+                        Debugger.log("Stock is not available");
+                    }
+                }
+                Debugger.log("quantity = "+noOfStocks);
+                totalStockPrice = noOfStocks*stockPrice;
+                Debugger.log("totalStockPrice = "+totalStockPrice);
+                currentBalance = currentBalance +totalStockPrice;
+                Debugger.log("currentBalance = "+currentBalance);
+            }else{
+                Debugger.log("Something went Wrong :(");
+            }
+
+            Debugger.log("Balance after turn "+(currentTurn+1)+" is "+currentBalance);
+            setPlayerTransactionsForTurn(currentTurn, transaction, stockCompany, quantity, getCompanyStockArrayByStockName(stockCompany)[currentTurn] );
+            currentTurn++;
+        }
+        Debugger.log("Final Balance = "+currentBalance);
     }
 
 
-
-
-    private double[] value;
-    Broker broker = new Broker();
-
-    public double[] startToBuy(){
-        value = broker.price("TAB");
-        return value;
-    }
-
-
-    ///////////////IMPORTANT
-    //////how to get AIPlayer currently own stocks
-    private void getAIPlayerCurrentlyOwnStocks(){
+    /**
+     * get AIPlayer currently own stocks
+     * @return returns the currently owned stocks of the AI Player
+     */
+    private List<StockWithQuantity> getAIPlayerCurrentlyOwnStocks(){
         List<StockQuantity> AIPlayerCurrentlyOwnStocks = new Broker().portfolio(PLAYER_NAME).getOwnStockList();
 
-        for(StockQuantity stockQuantity:AIPlayerCurrentlyOwnStocks ){
-            System.out.println("AI Player has > Stock : " + stockQuantity.getStock() + " quantity : " + stockQuantity.getQuantity());
-        }
+        List<StockWithQuantity> stockWithQuantities = new ArrayList<>();
 
+        for(StockQuantity stockQuantity:AIPlayerCurrentlyOwnStocks ){
+            stockWithQuantities.add(new StockWithQuantity(stockQuantity.getStock(),stockQuantity.getQuantity()));
+        }
+        return stockWithQuantities;
     }
 
+    /**
+     * get AIPlayer current balance
+     * @return returns bank balance of the AI player
+     */
+    private double getAIPlayerCurrentBalance(){
+        return new Bank().balance(PLAYER_NAME);
+    }
+
+    /**
+     * set the transaction according to turn of the AI player
+     *
+     * @param index as current turn
+     * @param sellOrBuy transaction- whether sell or buy
+     * @param stock company name to buy or sell
+     * @param quantity no of stocks to buy or sell
+     * @param currentStockPriceOfTheStock stock price of the current stock
+     */
     private void setPlayerTransactionsForTurn(int index, String sellOrBuy, String stock, int quantity, double currentStockPriceOfTheStock){
         PlayerTransactionsOfTurn playerTransactionsOfTurn = new PlayerTransactionsOfTurn();
         playerTransactionsOfTurn.setName(PLAYER_NAME);
@@ -74,6 +129,11 @@ public class AIPlayer extends AnalyserMain {
         playerTransactionsOfTurn.setStockPrice(currentStockPriceOfTheStock);
         playerTransactionsOfTurnsArray[index] = playerTransactionsOfTurn;
     }
+
+    /**
+     * get the overall transactions based on turns of AIPlayer
+     * @return returns transactions based on turn
+     */
 
     public PlayerTransactionsOfTurn[] getPlayerTransactionsOfTurnsArray(){
         return playerTransactionsOfTurnsArray;

@@ -1,19 +1,32 @@
 package com.smsimulator.core;
 
-/**
- * Created by asusgeforce on 16/06/2018.
- */
+
 public class Analyst extends AnalyserMain {
 
-    public String recommendedStocks[] = new String[10];
+    public String recommendedStocksForPlayer[] = new String[10];
 
     public Analyst() {
-        recommendedStocks[0] = "Buy HNB";
 
-        //recommendedStocks = {"Buy HNB", "Buy TAB", "Sell SUN", "Buy SIRA", "Sell GSK", "Sell DLT", "Buy UNI", "Buy MGC", "Buy SHL", "Sell JKH"};
+        int recommendedStocksTurn = 0;
+        for(Prediction recommendedStocks : prediction){
+            String transactionTypeToDisplay = recommendedStocks.getBuyOrSell();
+            String transactionCompanyToDisplay = recommendedStocks.getStockName();
+            if (transactionTypeToDisplay.equals(BUY_TAG)){
+                recommendedStocksForPlayer[recommendedStocksTurn] = "Buying the Stocks from "+transactionCompanyToDisplay+" might be an Asset in the Future!!";
+            }else if(transactionTypeToDisplay.equals(SELL_TAG)){
+                recommendedStocksForPlayer[recommendedStocksTurn] = "Selling Your Stocks from "+transactionCompanyToDisplay+" Gives a Profit to You!!";
+            } else {
+                Debugger.log("No Recommendations");
+            }
+            recommendedStocksTurn++;
+        }
     }
 
+    /**
+     * get recommendations according to the strategy
+     * @return returns recommendations to the player as hints
+     */
     public String[] getRecommendations() {
-        return recommendedStocks;
+        return recommendedStocksForPlayer;
     }
 }
