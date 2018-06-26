@@ -40,7 +40,7 @@ public class Main extends InboundRoot {
         component.start();
 
         //initialize game turn from the turn where the application terminated finally
-        TURN = DBUtils.getFinalGameTurn();
+       // TURN = DBUtils.getFinalGameTurn();
 
         //initialize stocks
         Broker.generateNewStock();

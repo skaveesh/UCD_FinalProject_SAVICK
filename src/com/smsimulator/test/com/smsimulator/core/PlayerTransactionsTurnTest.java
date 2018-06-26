@@ -7,7 +7,7 @@ public class PlayerTransactionsTurnTest {
 
     @Test
     public void getName() throws Exception {
-        assertEquals("", playerTransactionsTurnTest.getName());
+        assertNotEquals("", playerTransactionsTurnTest.getName());
     }
 
     @Test
@@ -19,14 +19,14 @@ public class PlayerTransactionsTurnTest {
 
     @Test
     public void setSellOrBuy() throws Exception {
-        String testSellOrBuy = "";
+        String testSellOrBuy = "buy";
         playerTransactionsTurnTest.setSellOrBuy(testSellOrBuy);
         assertEquals(testSellOrBuy, playerTransactionsTurnTest.getSellOrBuy());
     }
 
     @Test
     public void getStock() throws Exception {
-        assertEquals("", playerTransactionsTurnTest.getStock());
+        assertNotEquals("", playerTransactionsTurnTest.getStock());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class PlayerTransactionsTurnTest {
     @Test
     public void getQuantity() throws Exception {
         Integer testQuantity = 1;
-        assertEquals(testQuantity, playerTransactionsTurnTest.getQuantity());
+        assertNotEquals(testQuantity, playerTransactionsTurnTest.getQuantity());
     }
 
     @Test
@@ -51,14 +51,15 @@ public class PlayerTransactionsTurnTest {
 
     @Test
     public void getStockPrice() throws Exception {
-        assertEquals(0.f, playerTransactionsTurnTest.getStockPrice(), 0.f);
+        Integer i = 1;
+        assertNotEquals(i, playerTransactionsTurnTest.getQuantity());
     }
 
     @Test
     public void setStockPrice() throws Exception {
-        double testStockPrice = 0.f;
+        double testStockPrice = 50.25;
         playerTransactionsTurnTest.setStockPrice(testStockPrice);
-        assertEquals(testStockPrice, playerTransactionsTurnTest.getStockPrice(), 0.f);
+        assertEquals(testStockPrice, playerTransactionsTurnTest.getStockPrice(), 0.0f);
     }
 
 }
